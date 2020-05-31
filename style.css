@@ -31,6 +31,12 @@ h1.green {
     color: var(--green_color);
 }
 
+.game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .board {
     margin: var(--margin);
     display: inline-flex;
@@ -189,8 +195,31 @@ input:checked[type="checkbox"]:before {
     100%    { transform: scale(1); }
 }
 
+@media screen and (max-width: 349px) {
+    :root {
+        --squarewidth: 65px;
+    }
+}  
+
+@media screen and (min-width: 350px) {
+    :root {
+        --squarewidth: 80px;
+    }
+}  
+
+@media screen and (min-width: 550px) {
+    :root {
+        --squarewidth: 120px;
+    }
+}
+
+@media screen and (min-width: 750px) {
+    :root {
+        --squarewidth: 150px;
+    }
+}
+
 :root {
-    --squarewidth: 100px;
     --gridwidth: calc(var(--squarewidth) * 3 + (var(--square_margin) * 6));
     --margin: 1em;
     --square_margin: 1px;
