@@ -21,7 +21,7 @@ if (localStorage.getItem('theme') != null) {
     $('body').addClass(localStorage.getItem('theme'));
     if (localStorage.getItem('theme') == "dark") {
         $('body').removeClass('light');
-        $('meta[name=theme-name]').attr('content', '#1c1c1c')
+        $('meta[name="theme-name"]').attr('content', '#1c1c1c')
         $('.darkSwitch').prop('checked', true);
         xImage = xImageDark;
         oImage = oImageDark;
@@ -33,13 +33,13 @@ if (localStorage.getItem('theme') != null) {
 $('.darkSwitch').click(function () {
     if ($(this).prop('checked')) {
         $('body').addClass('dark').removeClass('light');
-        $('meta[name=theme-name]').attr('content', '#1c1c1c')
+        $('meta[name="theme-name"]').attr('content', '#1c1c1c')
         localStorage.setItem('theme', 'dark');
         xImage = xImageDark;
         oImage = oImageDark;
     } else {
         $('body').addClass('light').removeClass('dark');
-        $('meta[name=theme-name]').attr('content', '#ebebeb')
+        $('meta[name="theme-name"]').attr('content', '#ebebeb')
         localStorage.setItem('theme', 'light');
         xImage = xImageLight;
         oImage = oImageLight;
