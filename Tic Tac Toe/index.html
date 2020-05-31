@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <meta name="theme-color" content="#ebebeb">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="manifest" href="./site.webmanifest">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,800;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+            .then(function(registration) {
+              console.log('Registration successful');
+            })
+        }
+    </script>
+
+</head>
+<body class="light">
+    <div class="game">
+        <div class="board">
+            <div class="boardInside">
+                <div class="grid hidden">
+                    <div id="square0" class="square 0"></div>
+                    <div id="square1" class="square 1"></div>
+                    <div id="square2" class="square 2"></div>
+                    <div id="square3" class="square 3"></div>
+                    <div id="square4" class="square 4"></div>
+                    <div id="square5" class="square 5"></div>
+                    <div id="square6" class="square 6"></div>
+                    <div id="square7" class="square 7"></div>
+                    <div id="square8" class="square 8"></div>
+                </div>
+                <div class="gameinfo">
+                    <h1 class>
+                        <img id="charSelectX" class="mark" src="https://i.imgur.com/B0fx71m.png" alt="X">
+                        or 
+                        <img id="charSelectO" class="mark" src="https://i.imgur.com/8b1PuMD.png" alt="O">
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="selections">
+        <div class="addButton"></div>
+        <input class="darkSwitch" type="checkbox">
+        </div>
+    </div>
+</body>
+</html>
