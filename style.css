@@ -1,0 +1,222 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bgColor);
+    transition: background 750ms ease-in-out;
+}
+
+h1 {
+    font-family: 'Open Sans', sans-serif;
+    color: #ebebeb;
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    text-shadow: 0px 0px 6px var(--dropShadowMark);
+}
+
+h1.red {
+    color: var(--red_color);
+}
+
+h1.green {
+    color: var(--green_color);
+}
+
+.board {
+    margin: var(--margin);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    width: var(--gridwidth);
+}
+
+.grid {
+    width: var(--gridwidth);
+    height: calc(var(--squarewidth) * 3);
+}
+
+.square {
+    width: var(--squarewidth);
+    height: var(--squarewidth);
+    background-color: var(--rectColor);
+    border-radius: 7.5px;
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    float: left;
+    margin: var(--square_margin);
+}
+
+.i:before {
+    transition: transform .5s ease-in;
+    content: ' ';
+    width: var(--squarewidth);
+    height: var(--squarewidth);
+    background-color: black;
+    border-radius: 50%;
+    opacity: .07;
+    transform: scale(0);
+    animation-name: grow-shrink;
+    animation-duration: 1250ms;
+    position: absolute;
+    z-index: 2;
+}
+
+.mark {
+    height: 100%;
+    opacity: .75;
+    z-index: 1;
+    filter: drop-shadow(-2px 4px 5px var(--dropShadowMark));
+}
+
+.mark.touched {
+    animation-name: shrink-grow;
+    animation-duration: 1000ms;
+}
+
+.gameinfo {
+    width: var(--gridwidth);
+    height: var(--gameinfo_height);
+    margin-top: 10px;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    justify-content: center;
+    background-color: var(--rectColor);
+    border-radius: 7.5px;
+}
+
+.addButton {
+    width: 35px;
+    height: 35px;
+    background: var(--rectColor);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.addButton:before {
+    content: ' ';
+    width: 15px;
+    height: 5px;
+    background: var(--accent);
+    display: inline-block;
+    border-radius: 2px;
+    position: absolute;
+}
+
+.addButton:after {
+    position: absolute;
+    content: ' ';
+    width: 15px;
+    height: 5px;
+    background: var(--accent);
+    display: inline-block;
+    border-radius: 2px;
+    transform: rotate(90deg);
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    background: var(--rectColor);
+    width: 65px;
+    height: 30px;
+    border-radius: 15px;
+    margin: 0;
+    margin-top: 8px;
+    margin-left: 1px;
+    outline: none;
+}
+
+input:checked[type="checkbox"] {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+input[type="checkbox"]:before {
+    float: left;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: block;
+    content: ' ';
+    transform: scale(.75);
+}
+
+input:checked[type="checkbox"]:before {
+    float: right;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: block;
+    content: ' ';
+    transform: scale(.75);
+}
+
+.hidden {
+    display:none;
+}
+
+@keyframes grow-shrink {
+    0%      { transform: scale(0); }
+    50%     { transform: scale(1.42); }
+    100%    { transform: scale(0); }
+}
+
+@keyframes shrink-grow {
+    0%      { transform: scale(1); }
+    50%     { transform: scale(.75); }
+    100%    { transform: scale(1); }
+}
+
+@keyframes shrink-grow-o {
+    0%      { transform: scale(1); }
+    50%     { transform: scale(.75); }
+    100%    { transform: scale(1); }
+}
+
+:root {
+    --squarewidth: 100px;
+    --gridwidth: calc(var(--squarewidth) * 3 + (var(--square_margin) * 6));
+    --margin: 1em;
+    --square_margin: 1px;
+    --dropShadowMark: black;
+
+    --red_color: #ef8080;
+    --green_color: #66fb9a;
+}
+
+.light {
+    --rectColor: rgba(29, 29, 29, 0.15);
+    --bgColor: #ebebeb;
+    --accent: #1c1c1c;
+}
+
+.dark {
+    --rectColor: rgba(0, 0, 0, 0.15);
+    --bgColor: #1c1c1c;
+    --accent: #ebebeb;
+}
+
+.blue {
+    --rectColor: rgba(70, 70, 70, 0.09);
+    --bgColor: #151822;
+}
+
+.gameinfo {
+    --gameinfo_height: calc(var(--squarewidth) / 2);
+}
