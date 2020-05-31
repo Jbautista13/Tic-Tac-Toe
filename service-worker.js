@@ -21,7 +21,7 @@ const RUNTIME = 'runtime';
 const PRECACHE_URLS = [
   'index.html',
   'styles.css',
-  'image',
+  '/images/',
   'app.js'
 ];
 
@@ -29,7 +29,7 @@ const PRECACHE_URLS = [
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(PRECACHE)
-      .then(cache => cache.addAll(PRECACHE_URLS)).then(cache.matchAll('/images/'))
+      .then(cache => cache.addAll(PRECACHE_URLS))
       .then(self.skipWaiting())
   );
 });
