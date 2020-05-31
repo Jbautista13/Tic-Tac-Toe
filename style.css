@@ -49,6 +49,7 @@ h1.green {
 .grid {
     width: var(--gridwidth);
     height: calc(var(--squarewidth) * 3);
+    margin-top: 15px;
 }
 
 .square {
@@ -95,7 +96,6 @@ h1.green {
 .gameinfo {
     width: var(--gridwidth);
     height: var(--gameinfo_height);
-    margin-top: 10px;
     display: inline-flex;
     align-items: center;
     vertical-align: middle;
