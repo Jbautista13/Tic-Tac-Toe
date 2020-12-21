@@ -14,16 +14,40 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script defer src="app.js"></script>
     <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js')
-            .then(function(registration) {
-              console.log('Registration successful');
-            })
-        }
+    //    if ('serviceWorker' in navigator) {
+    //        navigator.serviceWorker.register('/service-worker.js')
+    //        .then(function(registration) {
+    //          console.log('Registration successful');
+    //        })
+    //    }
     </script>
 
 </head>
 <body class="light">
+    <div class="info" style="
+    width: 100px;
+    height: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    background: #1c1c1c;
+    display: none;">
+        <div class="Title" style="
+        text-align: center;
+        height: fit-content;
+        width: 179px;">
+            <h1 class="Name1">Tic Tac Toe</h1>
+        </div>
+    </div>
+    <div class="header fadeout">
+        <h1 class="title">
+            <span class="firstword green">Tic</span>
+            <br>
+            <span class="secondword">Tac</span>
+            <br>
+            <span class="thirdword green">Toe</span>
+        </h1>
+    </div>
     <div class="game">
         <div class="board">
             <div class="boardInside">
@@ -48,8 +72,13 @@
             </div>
         </div>
         <div class="selections">
-        <div class="addButton"></div>
-        <input class="darkSwitch" type="checkbox">
+            <div class="wins">
+                <img class="mark side x" src="./images/x_light.png" alt="x"><h1 class="countX"></h1>
+            
+            </div>
+            <div class="wins"><img class="mark side o" src="./images/o_light.png" alt="y"><h1 class="countY"></h1></div>
+            <!--<div class="addButton"></div>-->
+            <input class="darkSwitch" type="checkbox">
         </div>
     </div>
 </body>

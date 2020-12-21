@@ -7,7 +7,7 @@ body {
 body {
     margin: 0;
     padding: 0;
-    display: inline-flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     background: var(--bgColor);
@@ -15,10 +15,11 @@ body {
 }
 
 h1 {
+    font-size: 5vmin;
     font-family: 'Open Sans', sans-serif;
     color: #ebebeb;
     height: 100%;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     text-shadow: 0px 0px 6px var(--dropShadowMark);
 }
@@ -36,6 +37,41 @@ h1.red.noJS {
     font-size: 20px;
 }
 
+.header {
+    position: absolute;
+    top: 0;
+}
+
+h1.title {
+    font-size: 3.5em;
+    display: inline-block;
+    line-height: .75em;
+    text-align: center;
+}
+
+span {
+    display: inline-block;
+}
+
+span.green {
+    text-shadow: 0.25px 0.25px hsl(142deg 78% 72%), 0.5px 0.5px hsl(142deg 78% 72%), 0.75px 0.75px hsl(142deg 78% 72%), 1px 1px hsl(142deg 78% 72%), 1.25px 1.25px hsl(142deg 78% 72%), 1.5px 1.5px hsl(142deg 78% 72%), 1.75px 1.75px hsl(142deg 78% 72%), 2px 2px hsl(142deg 78% 72%), 2.25px 2.25px hsl(142deg 78% 72%), 2.5px 2.5px hsl(142deg 78% 72%), 2.75px 2.75px hsl(142deg 78% 72%), 3px 3px hsl(142deg 78% 72%), 10px 10px 30px rgba(0,0,0,.7);
+}
+
+span.firstword {
+    transform: rotate(-2deg);
+}
+
+span.secondword {
+    transform: rotate(1deg);
+    text-shadow: 0.25px 0.25px hsl(359deg 78% 72%), 0.5px 0.5px hsl(359deg 78% 72%), 0.75px 0.75px hsl(359deg 78% 72%), 1px 1px hsl(359deg 78% 72%), 1.25px 1.25px hsl(359deg 78% 72%), 1.5px 1.5px hsl(359 78% 72% / 1), 1.75px 1.75px hsl(359deg 78% 72%), 2px 2px hsl(359 78% 72% / 1), 2.25px 2.25px hsl(359deg 78% 72%), 2.5px 2.5px hsl(359deg 78% 72%), 2.75px 2.75px hsl(359deg 78% 72%), 3px 3px hsl(359deg 78% 72%), 10px 10px 30px rgba(0,0,0,.7);
+    margin-right: .5em;
+}
+
+span.thirdword {
+    margin-left: 1em;
+    transform: rotate(-1deg);
+}
+
 .game {
     display: flex;
     justify-content: center;
@@ -43,18 +79,94 @@ h1.red.noJS {
 }
 
 .board {
-    margin: var(--margin);
-    display: inline-flex;
+    margin: calc(var(--gridwidth) * 0.035);
+    display: flex;
     justify-content: center;
     align-items: center;
-    height: 400px;
     width: var(--gridwidth);
 }
 
 .grid {
     width: var(--gridwidth);
-    height: calc(var(--squarewidth) * 3);
-    margin-bottom: 15px;
+    height: var(--gridwidth);
+    margin-bottom: var(--marginbottom);
+    position: relative;
+    opacity: 0;
+    transition: opacity .5s ease-in;
+}
+
+.grid:before {
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    z-index: 2;
+    border-radius: 20px;
+    filter: drop-shadow(-2px 4px 5px var(--dropShadowMark));
+}
+
+.grid.red:before {
+    background-color: var(--bgColor);
+}
+
+.grid.green:before {
+    background-color: var(--bgColor);
+}
+
+.grid.vertical:before {
+    width: calc(var(--gridwidth) * 0.04386);
+    top: 50%;
+    margin-left: calc(-1 * ((var(--gridwidth) * 0.04386) /2));
+    margin-top: calc(-1 * ((var(--gridwidth) * .95614) / 2));
+    transition: height .2s ease-out, background 750ms ease-in-out;
+}
+
+.grid.horizontal:before {
+    height: calc(var(--gridwidth) * 0.04386);
+    left: 50%;
+    margin-top: calc(-1 * ((var(--gridwidth) * 0.04386) /2));
+    margin-left: calc(-1 * ((var(--gridwidth) * .95614) / 2));
+    transition: width .2s ease-out, transform .4s ease-in, background 750ms ease-in-out;
+}
+
+.grid.extendv:before {
+    height: calc(var(--gridwidth) * 0.95614);
+}
+
+.grid.extendh:before {
+    width: calc(var(--gridwidth) * 0.95614);
+}
+
+.grid.middle:before {
+    left: 50%;
+}
+
+.grid.left:before {
+    left: calc(100% * (1 / 6));
+}
+
+.grid.right:before {
+    left: calc(100% * (5 / 6));
+}
+
+.grid.center:before {
+    top: 50%;
+}
+
+.grid.top:before {
+    top: calc(100% * (1 / 6));
+}
+
+.grid.bottom:before {
+    top: calc(100% * (5 / 6));
+}
+
+.grid.tl:before {
+    transform: rotate(45deg);
+}
+
+.grid.bl:before {
+    transform: rotate(-45deg);
 }
 
 .square {
@@ -62,7 +174,7 @@ h1.red.noJS {
     height: var(--squarewidth);
     background-color: var(--rectColor);
     border-radius: 7.5px;
-    display: inline-flex;
+    display: flex;
     position: relative;
     align-items: center;
     justify-content: center;
@@ -100,13 +212,40 @@ h1.red.noJS {
 
 .gameinfo {
     width: var(--gridwidth);
-    height: var(--gameinfo_height);
-    display: inline-flex;
+    height: calc(var(--squarewidth) / 2);
+    display: flex;
     align-items: center;
     vertical-align: middle;
     justify-content: center;
     background-color: var(--rectColor);
     border-radius: 7.5px;
+}
+
+.gameinfo.movedown {
+    transform: translateY(var(--gameinfoY));
+    transition: transform .5s ease-out;
+}
+
+.gameinfo.moveup {
+    transform: translateY(calc( -1 * var(--gameinfoY) ));
+    transition: transform .5s ease-out;
+}
+
+.selections {
+    margin-right: calc(var(--gridwidth) * 0.035);
+}
+
+.wins {
+    width: 45px;
+    height: var(--winsheight);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: width .5s ease-in;
+}
+
+.count {
+    width: var(--winswidth);
 }
 
 .addButton {
@@ -140,11 +279,20 @@ h1.red.noJS {
     transform: rotate(90deg);
 }
 
+.darken {
+    transition: all .25s ease-in;
+    filter: brightness(.25);
+}
+
+.rainbow {
+    animation: rainbow 1s forwards infinite;
+}
+
 input[type="checkbox"] {
     -webkit-appearance: none;
     background: var(--rectColor);
-    width: 65px;
-    height: 30px;
+    width: var(--lightwidth);
+    height: var(--lightheight);
     border-radius: 15px;
     margin: 0;
     margin-top: 8px;
@@ -158,8 +306,8 @@ input:checked[type="checkbox"] {
 
 input[type="checkbox"]:before {
     float: left;
-    width: 30px;
-    height: 30px;
+    width: var(--lightheight);
+    height: var(--lightheight);
     border-radius: 50%;
     background: var(--accent);
     display: block;
@@ -178,8 +326,22 @@ input:checked[type="checkbox"]:before {
     transform: scale(.75);
 }
 
+.fadein {
+    opacity: 1;
+    transition: opacity .5s ease-in-out;
+}
+
+.fadeout {
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+}
+
 .hidden {
-    display:none;
+    display: none;
+}
+
+.visible {
+    opacity: 1;
 }
 
 @keyframes grow-shrink {
@@ -200,6 +362,12 @@ input:checked[type="checkbox"]:before {
     100%    { transform: scale(1); }
 }
 
+@keyframes rainbow {
+    0% { filter: hue-rotate(0deg); }
+    50% { filter: hue-rotate(360deg); }
+    100% { filter: hue-rotate(0deg); }
+}
+
 @media screen and (max-width: 349px) {
     :root {
         --squarewidth: 65px;
@@ -209,6 +377,14 @@ input:checked[type="checkbox"]:before {
 @media screen and (min-width: 350px) {
     :root {
         --squarewidth: 80px;
+        --fontsize: 1.3em;
+    }
+
+    .selections {
+        --winswidth: 60px;
+        --winsheight: 35px;
+        --lightwidth: 50px;
+        --lightheight: 23px;
     }
 }  
 
@@ -221,13 +397,23 @@ input:checked[type="checkbox"]:before {
 @media screen and (min-width: 750px) {
     :root {
         --squarewidth: 150px;
+        --fontsize: 2em;
+    }
+
+    .selections {
+        --winswidth: 85px;
+        --winsheight: 45px;
+        --lightwidth: 65px;
+        --lightheight: 30px;
     }
 }
 
 :root {
     --gridwidth: calc(var(--squarewidth) * 3 + (var(--square_margin) * 6));
+    --marginbottom: calc(var(--gridwidth) * .01754386);
     --margin: 1em;
-    --square_margin: 1px;
+    --square_margin: calc(var(--squarewidth) * 0.0125);
+    --gameinfoY: calc(calc((var(--gridwidth) / 2) + (var(--marginbottom) / 2)));
     --dropShadowMark: black;
 
     --red_color: #ef8080;
@@ -237,11 +423,11 @@ input:checked[type="checkbox"]:before {
 .light {
     --rectColor: rgba(29, 29, 29, 0.15);
     --bgColor: #ebebeb;
-    --accent: #1c1c1c;
+    --accent: #262322;
 }
 
 .dark {
-    --rectColor: rgba(0, 0, 0, 0.15);
+    --rectColor: rgba(0, 0, 0, 0.3);
     --bgColor: #1c1c1c;
     --accent: #ebebeb;
 }
@@ -249,8 +435,4 @@ input:checked[type="checkbox"]:before {
 .blue {
     --rectColor: rgba(70, 70, 70, 0.09);
     --bgColor: #151822;
-}
-
-.gameinfo {
-    --gameinfo_height: calc(var(--squarewidth) / 2);
 }
