@@ -3,13 +3,9 @@ var turn = 0;
 var i = 0;
 var winner = false;
 
-var xImage = "./images/x_light.png";
-var oImage = "./images/o_light.png";
+var xImage = '<svg version="1.1" class="mark x" id="X_Shape" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve"><g id="shapeShadow"><rect x="281.55" y="323.71" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -187.5368 322.119)" class="shapeShadow" width="27.02" height="127.46"/><polyline class="shapeShadow" points="148.07,259.55 167.18,240.45 77.05,150.32 57.95,169.42 148.07,259.55 	"/><polyline class="shapeShadow" points="77.05,330.57 57.95,349.68 150.32,442.05 169.43,422.95 77.05,330.57 	"/></g><polygon id="xTop" class="xTop" points="442.05,150.32 349.68,57.95 259.55,148.07 169.43,57.95 77.05,150.32 167.18,240.45 77.05,330.57 169.43,422.95 259.55,332.82 349.68,422.95 442.05,330.57 351.93,240.45 "/> </svg>';
 
-var xImageLight = "./images/x_light.png";
-var oImageLight = "./images/o_light.png";
-var xImageDark = "./images/x_dark.png";
-var oImageDark = "./images/o_dark.png";
+var oImage = '<svg version="1.1" class="mark y" id="O_Shape" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve"><g id="shapeShadow"><path class="shapeShadow" d="M245.99,132.01c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S212.06,132.01,245.99,132.01    M245.99,75.01c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S347.61,75.01,245.99,75.01L245.99,75.01z"/></g><g id="oTop"><path class="oTop" d="M254.01,113.99c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S220.09,113.99,254.01,113.99    M254.01,56.99c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S355.63,56.99,254.01,56.99L254.01,56.99z"/></g></svg>';
 
 var squares = new Array(9);
 
@@ -25,12 +21,12 @@ if (localStorage.getItem('theme') != null) {
         $('body').removeClass('light');
         $('meta[name="theme-color"]').attr('content', '#1c1c1c');
         $('.darkSwitch').prop('checked', true);
-        xImage = xImageDark;
-        oImage = oImageDark;
+        //xImage = xImageDark;
+        //oImage = oImageDark;
     } else {
         $('body').removeClass('dark');
-        xImage = xImageLight;
-        oImage = oImageLight;
+        //xImage = xImageLight;
+        //oImage = oImageLight;
     }
     themeChange();
 }
@@ -45,18 +41,18 @@ $('.darkSwitch').click(function () {
             $('meta[name="theme-color"]').attr('content', '#1c1c1c');
         }, 0);
         localStorage.setItem('theme', 'dark');
-        xImage = xImageDark;
-        oImage = oImageDark;
+        //xImage = xImageDark;
+        //oImage = oImageDark;
     } else {
         $('body').addClass('light').removeClass('dark');
         setTimeout(function () {
             $('meta[name="theme-color"]').attr('content', '#ebebeb');
         }, 0);
         localStorage.setItem('theme', 'light');
-        xImage = xImageLight;
-        oImage = oImageLight;
+        //xImage = xImageLight;
+        //oImage = oImageLight;
     }
-    themeChange();
+    //themeChange();
 });
 
 function themeChange() {
@@ -78,7 +74,7 @@ function newGame() {
     }, 520);
     squares = new Array(9);
 
-    $('.gameinfo').html('<h1 class> <img id="charSelectX" class="mark x" src="' + xImage + '" alt="X"> or <img id="charSelectO" class="mark o" src="' + oImage + '" alt="O"> </h1>')
+    $('.gameinfo').html('<h1 class> <svg version="1.1" class="mark side x" id="charSelectX" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve"><g id="shapeShadow"><rect x="281.55" y="323.71" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -187.5368 322.119)" class="shapeShadow" width="27.02" height="127.46"/><polyline class="shapeShadow" points="148.07,259.55 167.18,240.45 77.05,150.32 57.95,169.42 148.07,259.55 	"/><polyline class="shapeShadow" points="77.05,330.57 57.95,349.68 150.32,442.05 169.43,422.95 77.05,330.57 	"/></g><polygon id="xTop" class="xTop" points="442.05,150.32 349.68,57.95 259.55,148.07 169.43,57.95 77.05,150.32 167.18,240.45 77.05,330.57 169.43,422.95 259.55,332.82 349.68,422.95 442.05,330.57 351.93,240.45 "/> </svg> or <svg version="1.1" class="mark side o" id="charSelectO" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve"><g id="shapeShadow"><path class="shapeShadow" d="M245.99,132.01c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S212.06,132.01,245.99,132.01    M245.99,75.01c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S347.61,75.01,245.99,75.01L245.99,75.01z"/></g><g id="oTop"><path class="oTop" d="M254.01,113.99c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S220.09,113.99,254.01,113.99    M254.01,56.99c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S355.63,56.99,254.01,56.99L254.01,56.99z"/></g></svg> </h1>')
 
     $('.board').on('click', '#charSelectX', function() {
         turn = 0;
@@ -119,14 +115,14 @@ $(".square").click(function () {
         setTimeout(function () {
             square.toggleClass("i");
         }, 1250);
-        if (square.children('img')[0] != null) {
-            const mark = square.children('img');
-            mark.toggleClass("touched");
-            setTimeout(function () {
-                mark.toggleClass("touched");
-            }, 1000);
-        }
-    } else if (square.children('img')[0] == null) {
+        //if (square.children('svg')[0] != null) {
+        //    const mark = square.children('svg');
+        //    mark.toggleClass("touched");
+        //    setTimeout(function () {
+        //        mark.toggleClass("touched");
+        //    }, 1000);
+        //}
+    } else if (square.children('svg')[0] == null) {
         addMark(square);
         turn++; i++;
         if (calculateWin(square.attr("class").split(" ")[1])) {
@@ -144,26 +140,14 @@ $(".square").click(function () {
 });
 
 function addMark(x) {
-    x.append("<img>");
-    var className;
-    var src;
-    var alt;
     let index = x.attr("class").split(" ")[1];
     if (turn % 2 == 0) {
-        className = "mark x";
-        src = xImage;
-        alt = "x";
+        x.append(xImage);
         squares[index] = 'X';
     } else {
-        className = "mark o";
-        src = oImage;
-        alt = "y";
+        x.append(oImage);
         squares[index] = 'O';
     }
-
-    x.children('img').attr("class", className);
-    x.children('img').attr("src", src);
-    x.children('img').attr("alt", alt);
 };
 
 function removeMark() {
@@ -199,10 +183,10 @@ function changeGameInfoTurn() {
     var image;
     var h1 = $('.gameinfo').children('h1');
     if (turn % 2 == 0) {
-        image = '<img class="mark x" src="' + xImage + '" alt="X">';
+        image = xImage;
         h1.attr("class", "red");
     } else {
-        image = '<img id="charSelectO" class="mark o" src="' + oImage + '" alt="O">';
+        image = oImage;
         h1.attr("class", "green");
     }
 
@@ -255,10 +239,10 @@ function won(shape) {
     var image;
     var h1 = $('.gameinfo').children('h1');
     if (shape == 0) {
-        image = '<img class="mark x" src="' + xImage + '" alt="X">';
+        image = xImage;
         h1.attr("class", "red");
     } else {
-        image = '<img id="charSelectO" class="mark o" src="' + oImage + '" alt="O">';
+        image = oImage;
         h1.attr("class", "green");
     }
     

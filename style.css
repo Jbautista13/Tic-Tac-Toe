@@ -100,7 +100,7 @@ span.thirdword {
     width: 0;
     height: 0;
     position: absolute;
-    z-index: 2;
+    z-index: 3;
     border-radius: 20px;
     filter: drop-shadow(-2px 4px 5px var(--dropShadowMark));
 }
@@ -183,6 +183,11 @@ span.thirdword {
     margin: var(--square_margin);
 }
 
+.i {
+    animation-name: blip;
+    animation-duration: 1250ms;
+}
+
 .i:before {
     transition: transform .5s ease-in;
     content: ' ';
@@ -208,6 +213,19 @@ span.thirdword {
 .mark.touched {
     animation-name: shrink-grow;
     animation-duration: 1000ms;
+}
+
+.shapeShadow {
+    fill: var(--accent);
+    transition: fill 750ms ease-in-out;
+}
+
+.xTop {
+    fill: #fb6666;
+}
+
+.oTop {
+    fill: #66fb9a;
 }
 
 .gameinfo {
@@ -346,8 +364,14 @@ input:checked[type="checkbox"]:before {
 
 @keyframes grow-shrink {
     0%      { transform: scale(0); }
-    50%     { transform: scale(1.42); }
-    100%    { transform: scale(0); }
+    50%     { transform: scale(1.42); opacity: .07; }
+    100%    { transform: scale(0); opacity: 0; }
+}
+
+@keyframes blip {
+    0%      { transform: scale(1); }
+    50%     { transform: scale(.975); }
+    100%    { transform: scale(1); }
 }
 
 @keyframes shrink-grow {
@@ -424,12 +448,14 @@ input:checked[type="checkbox"]:before {
     --rectColor: rgba(29, 29, 29, 0.15);
     --bgColor: #ebebeb;
     --accent: #262322;
+    --shadowColor: #1a1a1a;
 }
 
 .dark {
     --rectColor: rgba(0, 0, 0, 0.3);
     --bgColor: #1c1c1c;
     --accent: #ebebeb;
+    --shadowColor: #ebebeb;
 }
 
 .blue {
