@@ -21,14 +21,9 @@ if (localStorage.getItem('theme') != null) {
         $('body').removeClass('light');
         $('meta[name="theme-color"]').attr('content', '#1c1c1c');
         $('.darkSwitch').prop('checked', true);
-        //xImage = xImageDark;
-        //oImage = oImageDark;
     } else {
         $('body').removeClass('dark');
-        //xImage = xImageLight;
-        //oImage = oImageLight;
     }
-    themeChange();
 }
 
 if (localStorage.getItem('xwins') != null) {
@@ -41,31 +36,18 @@ $('.darkSwitch').click(function () {
             $('meta[name="theme-color"]').attr('content', '#1c1c1c');
         }, 0);
         localStorage.setItem('theme', 'dark');
-        //xImage = xImageDark;
-        //oImage = oImageDark;
     } else {
         $('body').addClass('light').removeClass('dark');
         setTimeout(function () {
             $('meta[name="theme-color"]').attr('content', '#ebebeb');
         }, 0);
         localStorage.setItem('theme', 'light');
-        //xImage = xImageLight;
-        //oImage = oImageLight;
     }
-    //themeChange();
 });
-
-function themeChange() {
-    setTimeout(function () {
-        $('.mark.x').attr("src", xImage);
-        $('.mark.o').attr("src", oImage);
-    }, 250);
-};
 
 function newGame() {
 
     $('.header').removeClass('fadeout');
-    $('.header').addClass('fadein');
     
     i = 0;
     setTimeout( function () {
@@ -115,18 +97,10 @@ $(".square").click(function () {
         setTimeout(function () {
             square.toggleClass("i");
         }, 1250);
-        //if (square.children('svg')[0] != null) {
-        //    const mark = square.children('svg');
-        //    mark.toggleClass("touched");
-        //    setTimeout(function () {
-        //        mark.toggleClass("touched");
-        //    }, 1000);
-        //}
     } else if (square.children('svg')[0] == null) {
         addMark(square);
         turn++; i++;
         if (calculateWin(square.attr("class").split(" ")[1])) {
-            //calculateWinningSquares(square.attr("class").split(" ")[1]);
             won(turn % 2 == 0);
         } else {
             changeGameInfoTurn();
@@ -152,10 +126,10 @@ function addMark(x) {
 
 function removeMark() {
 
-    markType = $('.grid').attr('class').split(' ').length - 2;
+    diagonal = $('.grid').attr('class').indexOf("bl") != -1 || $('.grid').attr('class').indexOf("tl") != -1;
 
-    console.log(markType);
-    if (markType == 4) {
+    console.log(diagonal);
+    if (!diagonal) {
         $('.grid').removeClass($('.grid').attr('class').split(' ').pop());
         setTimeout( function () {
             $('.grid').removeClass('horizontal center');
@@ -163,15 +137,13 @@ function removeMark() {
                 $('.grid').removeClass($('.grid').attr('class').split(' ').pop());
             }, 20);
         }, 200);
-    } else if (markType == 5) {
-        //$('.grid').removeClass($('.grid').attr('class').split(' ').pop());
+    } else {
         $('.grid').removeClass('tl bl');
         setTimeout( function () {
             $('.grid').removeClass('extendh');
             setTimeout( function () {
                 $('.grid').removeClass('horizontal center');
                 setTimeout( function () {
-                    //$('.grid').removeClass($('.grid').attr('class').split(' ').pop());
                     $('.grid').removeClass('red green');
                 }, 20);
             }, 300);
@@ -252,66 +224,6 @@ function won(shape) {
     gameOver();
 }
 
-function calculateWins(squareNum) {
-    if (i < 5) {
-        return false;
-    } else {
-        switch(squareNum) {
-            case '0':
-                return (
-                    (squares[0] == squares[1] && squares[1] == squares[2]) ||
-                    (squares[0] == squares[3] && squares[3] == squares[6]) ||
-                    (squares[0] == squares[4] && squares[4] == squares[8])
-                );
-            case '1':
-                return (
-                    (squares[0] == squares[1] && squares[1] == squares[2]) ||
-                    (squares[1] == squares[4] && squares[4] == squares[7])
-                );
-            case '2':
-                return (
-                    (squares[0] == squares[1] && squares[1] == squares[2]) ||
-                    (squares[2] == squares[4] && squares[4] == squares[6]) ||
-                    (squares[2] == squares[5] && squares[5] == squares[8])
-                );
-            case '3':
-                return (
-                    (squares[0] == squares[3] && squares[3] == squares[6]) ||
-                    (squares[3] == squares[4] && squares[4] == squares[5])
-                );
-            case '4':
-                return (
-                    (squares[0] == squares[4] && squares[4] == squares[8]) ||
-                    (squares[1] == squares[4] && squares[4] == squares[7]) ||
-                    (squares[2] == squares[4] && squares[4] == squares[6]) ||
-                    (squares[3] == squares[4] && squares[4] == squares[5])
-                );
-            case '5':
-                return (
-                    (squares[2] == squares[5] && squares[5] == squares[8]) ||
-                    (squares[3] == squares[4] && squares[4] == squares[5])
-                );
-            case '6':
-                return (
-                    (squares[0] == squares[3] && squares[3] == squares[6]) ||
-                    (squares[2] == squares[4] && squares[4] == squares[6]) ||
-                    (squares[6] == squares[7] && squares[7] == squares[8])
-                );
-            case '7':
-                return (
-                    (squares[1] == squares[4] && squares[4] == squares[7]) ||
-                    (squares[6] == squares[7] && squares[7] == squares[8])
-                );
-            case '8':
-                return (
-                    (squares[0] == squares[4] && squares[4] == squares[8]) ||
-                    (squares[2] == squares[5] && squares[5] == squares[8]) ||
-                    (squares[6] == squares[7] && squares[7] == squares[8])
-                );
-        }
-    }
-};
-
 function markRow(row) {
     if (turn % 2 == 0) {
         $('.grid').addClass('red');
@@ -363,7 +275,7 @@ function markRow(row) {
     }, 250);
 }
 
-function calculateWin/*ningSquares*/(squareNum) {
+function calculateWin(squareNum) {
     if (i < 5) {
         return false;
     } else {
@@ -527,3 +439,63 @@ function calculateWin/*ningSquares*/(squareNum) {
             }
         }
 };
+
+/*function calculateWins(squareNum) {
+    if (i < 5) {
+        return false;
+    } else {
+        switch(squareNum) {
+            case '0':
+                return (
+                    (squares[0] == squares[1] && squares[1] == squares[2]) ||
+                    (squares[0] == squares[3] && squares[3] == squares[6]) ||
+                    (squares[0] == squares[4] && squares[4] == squares[8])
+                );
+            case '1':
+                return (
+                    (squares[0] == squares[1] && squares[1] == squares[2]) ||
+                    (squares[1] == squares[4] && squares[4] == squares[7])
+                );
+            case '2':
+                return (
+                    (squares[0] == squares[1] && squares[1] == squares[2]) ||
+                    (squares[2] == squares[4] && squares[4] == squares[6]) ||
+                    (squares[2] == squares[5] && squares[5] == squares[8])
+                );
+            case '3':
+                return (
+                    (squares[0] == squares[3] && squares[3] == squares[6]) ||
+                    (squares[3] == squares[4] && squares[4] == squares[5])
+                );
+            case '4':
+                return (
+                    (squares[0] == squares[4] && squares[4] == squares[8]) ||
+                    (squares[1] == squares[4] && squares[4] == squares[7]) ||
+                    (squares[2] == squares[4] && squares[4] == squares[6]) ||
+                    (squares[3] == squares[4] && squares[4] == squares[5])
+                );
+            case '5':
+                return (
+                    (squares[2] == squares[5] && squares[5] == squares[8]) ||
+                    (squares[3] == squares[4] && squares[4] == squares[5])
+                );
+            case '6':
+                return (
+                    (squares[0] == squares[3] && squares[3] == squares[6]) ||
+                    (squares[2] == squares[4] && squares[4] == squares[6]) ||
+                    (squares[6] == squares[7] && squares[7] == squares[8])
+                );
+            case '7':
+                return (
+                    (squares[1] == squares[4] && squares[4] == squares[7]) ||
+                    (squares[6] == squares[7] && squares[7] == squares[8])
+                );
+            case '8':
+                return (
+                    (squares[0] == squares[4] && squares[4] == squares[8]) ||
+                    (squares[2] == squares[5] && squares[5] == squares[8]) ||
+                    (squares[6] == squares[7] && squares[7] == squares[8])
+                );
+        }
+    }
+};*/
