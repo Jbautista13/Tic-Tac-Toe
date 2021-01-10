@@ -15,13 +15,13 @@ body {
 }
 
 h1 {
-    font-size: 5vmin;
+    font-size: var(--fontsize);
     font-family: 'Open Sans', sans-serif;
     color: #ebebeb;
     height: 100%;
     display: flex;
     align-items: center;
-    text-shadow: 0px 0px .5vw var(--dropShadowMark);
+    text-shadow: 0px 0px var(--dropshadowradius) var(--dropShadowMark);
 }
 
 h1.red {
@@ -207,7 +207,7 @@ span.thirdword {
     height: 100%;
     opacity: .75;
     z-index: 1;
-    filter: drop-shadow(-2px 4px 5px var(--dropShadowMark));
+    filter: drop-shadow(calc(var(--dropshadowscale) / -5) calc(var(--dropshadowscale) / 2.5) calc(var(--dropshadowscale) / 2) var(--dropShadowMark));
 }
 
 .mark.touched {
@@ -311,7 +311,7 @@ input[type="checkbox"] {
     background: var(--rectColor);
     width: var(--lightwidth);
     height: var(--lightheight);
-    border-radius: 15px;
+    border-radius: calc(var(--lightheight) / 1.5);
     margin: 0;
     margin-top: 8px;
     margin-left: 1px;
@@ -405,7 +405,9 @@ input:checked[type="checkbox"]:before {
 @media screen and (min-width: 350px) {
     :root {
         --squarewidth: 80px;
-        --fontsize: 1.3em;
+        --fontsize: 26.5px;
+        --dropshadowradius: 5.5px;
+        --dropshadowscale: 5.3px;
     }
 
     .selections {
@@ -419,13 +421,18 @@ input:checked[type="checkbox"]:before {
 @media screen and (min-width: 550px) {
     :root {
         --squarewidth: 120px;
+        --dropshadowradius: 8.2px;
+        --fontsize: 40px;
+        --dropshadowscale: 8px;
     }
 }
 
 @media screen and (min-width: 750px) {
     :root {
         --squarewidth: 150px;
-        --fontsize: 2em;
+        --fontsize: 50px;
+        --dropshadowradius: 10.25px;
+        --dropshadowscale: 10px;
     }
 
     .selections {
