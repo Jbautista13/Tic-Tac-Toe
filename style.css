@@ -335,6 +335,7 @@ input[type="checkbox"]:before {
     display: block;
     content: ' ';
     transform: scale(.75);
+    transform-origin: center center;
 }
 
 input:checked[type="checkbox"]:before {
@@ -346,6 +347,7 @@ input:checked[type="checkbox"]:before {
     display: block;
     content: ' ';
     transform: scale(.75);
+    transform-origin: center center;
 }
 
 .fadein {
@@ -412,7 +414,7 @@ input:checked[type="checkbox"]:before {
 
     .selections {
         --winswidth: 60px;
-        --winsheight: 6.5vmin;
+        --winsheight: 8.5vmin;
         --lightwidth: calc(var(--winsheight) * 1.45);
         --lightheight: calc(var(--lightwidth) * .44);
     }
