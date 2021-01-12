@@ -43,7 +43,7 @@ h1.red.noJS {
 }
 
 h1.title {
-    font-size: 3.5em;
+    font-size: 7.5vmin;
     display: inline-block;
     line-height: .75em;
     text-align: center;
@@ -173,7 +173,7 @@ span.thirdword {
     width: var(--squarewidth);
     height: var(--squarewidth);
     background-color: var(--rectColor);
-    border-radius: 7.5px;
+    border-radius: 1.5vmin;
     display: flex;
     position: relative;
     align-items: center;
@@ -236,7 +236,7 @@ span.thirdword {
     vertical-align: middle;
     justify-content: center;
     background-color: var(--rectColor);
-    border-radius: 7.5px;
+    border-radius: 1.5vmin;
 }
 
 .gameinfo.movedown {
@@ -404,42 +404,33 @@ input:checked[type="checkbox"]:before {
 
 @media screen and (min-width: 350px) {
     :root {
-        --squarewidth: 80px;
-        --fontsize: 26.5px;
-        --dropshadowradius: 5.5px;
-        --dropshadowscale: 5.3px;
+        --squarewidth: 20vmin;
+        --fontsize: 7vmin;
+        --dropshadowradius: 1vmin;
+        --dropshadowscale: 1vmin;
     }
 
     .selections {
         --winswidth: 60px;
-        --winsheight: 35px;
-        --lightwidth: 50px;
-        --lightheight: 23px;
-    }
-}  
-
-@media screen and (min-width: 550px) {
-    :root {
-        --squarewidth: 120px;
-        --dropshadowradius: 8.2px;
-        --fontsize: 40px;
-        --dropshadowscale: 8px;
+        --winsheight: 5.5vmin;
+        --lightwidth: 7.8vmin;
+        --lightheight: 3.6vmin;
     }
 }
 
 @media screen and (min-width: 750px) {
     :root {
-        --squarewidth: 150px;
-        --fontsize: 50px;
-        --dropshadowradius: 10.25px;
-        --dropshadowscale: 10px;
+        --squarewidth: 15vmin;
+        --fontsize: 5vmin;
+        --dropshadowradius: 1vmin;
+        --dropshadowscale: 1vmin;
     }
 
     .selections {
         --winswidth: 85px;
-        --winsheight: 45px;
-        --lightwidth: 65px;
-        --lightheight: 30px;
+        --winsheight: 4.5vmin;
+        --lightwidth: 6.5vmin;
+        --lightheight: 3vmin;
     }
 }
 
