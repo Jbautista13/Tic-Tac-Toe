@@ -19,6 +19,6 @@
     "theme_color": "#ebebeb",
     "background_color": "#ebebeb",
     "display": "standalone",
-    "start_url": "./",
+    "start_url": "https://jbautista13.github.io",
     "scope": "."
     }
