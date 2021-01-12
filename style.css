@@ -307,7 +307,10 @@ span.thirdword {
 }
 
 input[type="checkbox"] {
+    appearance: none;
+    -moz-appearance: none;
     -webkit-appearance: none;
+    outline: none;
     background: var(--rectColor);
     width: var(--lightwidth);
     height: var(--lightheight);
@@ -315,10 +318,12 @@ input[type="checkbox"] {
     margin: 0;
     margin-top: 8px;
     margin-left: 1px;
-    outline: none;
 }
 
 input:focus {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
     outline: none;
 }
 
