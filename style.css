@@ -43,7 +43,7 @@ h1.red.noJS {
 }
 
 h1.title {
-    font-size: 7.5vmin;
+    font-size: calc(var(--fontsize) * 1.5);
     display: inline-block;
     line-height: .75em;
     text-align: center;
@@ -173,7 +173,7 @@ span.thirdword {
     width: var(--squarewidth);
     height: var(--squarewidth);
     background-color: var(--rectColor);
-    border-radius: 1.5vmin;
+    border-radius: calc(var(--squarewidth) / 10);
     display: flex;
     position: relative;
     align-items: center;
@@ -236,7 +236,7 @@ span.thirdword {
     vertical-align: middle;
     justify-content: center;
     background-color: var(--rectColor);
-    border-radius: 1.5vmin;
+    border-radius: calc(var(--squarewidth) / 10);
 }
 
 .gameinfo.movedown {
@@ -254,7 +254,7 @@ span.thirdword {
 }
 
 .wins {
-    width: 45px;
+    width: var(--winsheight);
     height: var(--winsheight);
     display: flex;
     align-items: center;
@@ -412,9 +412,9 @@ input:checked[type="checkbox"]:before {
 
     .selections {
         --winswidth: 60px;
-        --winsheight: 5.5vmin;
-        --lightwidth: 7.8vmin;
-        --lightheight: 3.6vmin;
+        --winsheight: 6.5vmin;
+        --lightwidth: calc(var(--winsheight) * 1.45);
+        --lightheight: calc(var(--lightwidth) * .44);
     }
 }
 
@@ -429,8 +429,8 @@ input:checked[type="checkbox"]:before {
     .selections {
         --winswidth: 85px;
         --winsheight: 4.5vmin;
-        --lightwidth: 6.5vmin;
-        --lightheight: 3vmin;
+        --lightwidth: calc(var(--winsheight) * 1.45);
+        --lightheight: calc(var(--lightwidth) * .44);
     }
 }
 
