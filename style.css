@@ -103,6 +103,7 @@ span.thirdword {
     display: flex;
     justify-content: center;
     align-items: center;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .board {
@@ -183,10 +184,12 @@ span.thirdword {
 
 .grid.tl:before {
     transform: rotate(45deg);
+    transition: width .2s ease-out, transform .4s ease-in 200ms, background 750ms ease-in-out;
 }
 
 .grid.bl:before {
     transform: rotate(-45deg);
+    transition: width .2s ease-out, transform .4s ease-in 200ms, background 750ms ease-in-out;
 }
 
 .square {
@@ -223,6 +226,7 @@ span.thirdword {
     position: absolute;
     z-index: 4;
     backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     transition: opacity .5s ease-in-out;
 }
 
@@ -248,6 +252,10 @@ span.thirdword {
 
 .clickable {
     cursor: pointer;
+}
+
+.mark {
+    transition: opacity .5s ease-in-out;
 }
 
 .markScore,
@@ -276,6 +284,23 @@ span.thirdword {
     fill: #66fb9a;
 }
 
+.turnInfoText {
+    text-shadow:
+        -.25px .25px 0 #262322,
+        -.5px .5px 0 var(--accent),
+        -.75px .75px 0 var(--accent),
+        -1px 1px 0 var(--accent),
+        -1.25px 1.25px 0 var(--accent),
+        -1.5px 1.5px 0 var(--accent),
+        -1.75px 1.75px 0 var(--accent),
+        -2px 2px 0 var(--accent),
+        -2.25px 2.25px 0 var(--accent),
+        -2.5px 2.5px 0 var(--accent),
+        -2.75px 2.75px 0 var(--accent),
+        -3px 3px 0 var(--accent);
+    filter: drop-shadow(calc(var(--scale) / -5) calc(var(--scale) / 2.5) calc(var(--scale) / 2) var(--dropShadowMark));
+}
+
 #charSelectX:focus-visible {
     box-shadow: 0 0 calc(var(--scale) * .7) calc(var(--scale) * .4) #1a1a1a;
     outline: none;
@@ -298,6 +323,11 @@ span.thirdword {
     outline: none;
 }
 
+.informationbar {
+    background-color: var(--rectColor);
+    border-radius: calc(var(--squarewidth) / 10);
+}
+
 .gameinfo {
     width: var(--gridwidth);
     height: calc(var(--squarewidth) / 2);
@@ -305,8 +335,7 @@ span.thirdword {
     align-items: center;
     vertical-align: middle;
     justify-content: center;
-    background-color: var(--rectColor);
-    border-radius: calc(var(--squarewidth) / 10);
+    transition: opacity .25s ease-in-out;
 }
 
 .game.moveleft {
@@ -314,12 +343,12 @@ span.thirdword {
     transition: transform .5s ease-out;
 }
 
-.gameinfo.movedown {
+.informationbar.movedown {
     transform: translateY(var(--gameinfoY));
     transition: transform .5s ease-out;
 }
 
-.gameinfo.moveup {
+.informationbar.moveup {
     transform: translateY(calc( -1 * var(--gameinfoY) ));
     transition: transform .5s ease-out;
 }
@@ -472,7 +501,6 @@ input:checked[type="checkbox"]:before {
 
 .fadeout {
     opacity: 0;
-    transition: opacity .5s ease-in-out;
 }
 
 .hidden {
