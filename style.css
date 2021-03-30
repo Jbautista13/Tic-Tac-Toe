@@ -401,6 +401,13 @@ span.thirdword {
     animation: rainbow 1s forwards infinite;
 }
 
+#toggleSwitch {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+}
+
 input[type="checkbox"] {
     appearance: none;
     -moz-appearance: none;
