@@ -1,7 +1,7 @@
 {
     "name": "Tic Tac Toe",
     "short_name": "Tic Tac Toe",
-    "description": "Tic Tac Toe Web App, Install as PWA to Play Offline",
+    "description": "Tic Tac Toe Web App, Install as a PWA to Play Offline",
     "orientation": "portrait",
     "lang": "en-US",
     "icons": [

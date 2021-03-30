@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="apple-touch-startup-image" media="(device-width: 1170px) and (device-height: 2532px) and (-webkit-device-pixel-ratio: 2)" href="./apple-iphone-12-splash-portrait.png">
     <link rel="manifest" href="./site.webmanifest">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,800;1,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -24,27 +26,34 @@
         }
     </script>
 </head>
+
 <body class="light">
-    <div class="info" style="
-    width: 100px;
-    height: 100%;
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    background: #1c1c1c;
-    display: none;">
-        <div class="Title" style="
-        text-align: center;
-        height: fit-content;
-        width: 179px;">
-            <h1 class="Name1">Tic Tac Toe</h1>
+    <div class="screen fadeout hidden"></div>
+    <div class="noScores fadeout hidden">
+        <div class="information">
+            <h1 class="title" style="display: block;">
+                <span class="firstword red">No Saved Scores</span>
+            </h1>
+        </div>
+    </div>
+    <div class="popup fadeout hidden">
+        <div class="information">
+            <h1 class="title" style="display: block;">
+                <span class="firstword green"><span class="red">Reset</span> Scores?</span>
+            </h1>
+        </div>
+        <div class="options">
+            <h1 class="title" style="display: block;">
+                <span class="firstword green optionyes" tabindex="0">Yes</span>
+                <span class="firstword red optionno" tabindex="0">No</span>
+            </h1>
         </div>
     </div>
     <div class="header fadein fadeout">
         <h1 class="title">
             <span class="firstword green">Tic</span>
             <br>
-            <span class="secondword">Tac</span>
+            <span class="secondword red">Tac</span>
             <br>
             <span class="thirdword green">Toe</span>
         </h1>
@@ -53,33 +62,64 @@
         <div class="board">
             <div class="boardInside">
                 <div class="grid hidden">
-                    <div id="square0" class="square 0"></div>
-                    <div id="square1" class="square 1"></div>
-                    <div id="square2" class="square 2"></div>
-                    <div id="square3" class="square 3"></div>
-                    <div id="square4" class="square 4"></div>
-                    <div id="square5" class="square 5"></div>
-                    <div id="square6" class="square 6"></div>
-                    <div id="square7" class="square 7"></div>
-                    <div id="square8" class="square 8"></div>
+                    <div id="square0" class="square 0 clickable" tabindex="0"></div>
+                    <div id="square1" class="square 1 clickable" tabindex="0"></div>
+                    <div id="square2" class="square 2 clickable" tabindex="0"></div>
+                    <div id="square3" class="square 3 clickable" tabindex="0"></div>
+                    <div id="square4" class="square 4 clickable" tabindex="0"></div>
+                    <div id="square5" class="square 5 clickable" tabindex="0"></div>
+                    <div id="square6" class="square 6 clickable" tabindex="0"></div>
+                    <div id="square7" class="square 7 clickable" tabindex="0"></div>
+                    <div id="square8" class="square 8 clickable" tabindex="0"></div>
                 </div>
                 <div class="gameinfo">
                     <noscript>
                         <h1 class="red noJS">Please enable JavaScript to play Tic Tac Toe</h1>
-                      </noscript>
+                    </noscript>
                     <h1 class>
                     </h1>
                 </div>
             </div>
         </div>
         <div class="selections">
-            <div class="wins">
-                <svg version="1.1" class="mark side x" id="X_Shape" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve"><g id="shapeShadow"><rect x="281.55" y="323.71" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -187.5368 322.119)" class="shapeShadow" width="27.02" height="127.46"/><polyline class="shapeShadow" points="148.07,259.55 167.18,240.45 77.05,150.32 57.95,169.42 148.07,259.55 	"/><polyline class="shapeShadow" points="77.05,330.57 57.95,349.68 150.32,442.05 169.43,422.95 77.05,330.57 	"/></g><polygon id="xTop" class="xTop" points="442.05,150.32 349.68,57.95 259.55,148.07 169.43,57.95 77.05,150.32 167.18,240.45 77.05,330.57 169.43,422.95 259.55,332.82 349.68,422.95 442.05,330.57 351.93,240.45 "/> </svg><h1 class="countX"></h1>
+            <div class="score hidden">
+                <div class="wins">
+                    <svg version="1.1" class="markScore side x" id="X_Shape" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500"
+                        style="enable-background:new 0 0 500 500;" xml:space="preserve">
+                        <g id="shapeShadow">
+                            <rect x="281.55" y="323.71"
+                                transform="matrix(0.7071 -0.7071 0.7071 0.7071 -187.5368 322.119)" class="shapeShadow"
+                                width="27.02" height="127.46" />
+                            <polyline class="shapeShadow"
+                                points="148.07,259.55 167.18,240.45 77.05,150.32 57.95,169.42 148.07,259.55 	" />
+                            <polyline class="shapeShadow"
+                                points="77.05,330.57 57.95,349.68 150.32,442.05 169.43,422.95 77.05,330.57 	" />
+                        </g>
+                        <polygon id="xTop" class="xTop"
+                            points="442.05,150.32 349.68,57.95 259.55,148.07 169.43,57.95 77.05,150.32 167.18,240.45 77.05,330.57 169.43,422.95 259.55,332.82 349.68,422.95 442.05,330.57 351.93,240.45 " />
+                    </svg>
+                    <h1 class="count countX"></h1>
+                </div>
+                <div class="wins">
+                    <svg version="1.1" class="markScore side o" id="O_Shape" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500"
+                        style="enable-background:new 0 0 500 500;" xml:space="preserve">
+                        <g id="shapeShadow">
+                            <path class="shapeShadow"
+                                d="M245.99,132.01c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S212.06,132.01,245.99,132.01    M245.99,75.01c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S347.61,75.01,245.99,75.01L245.99,75.01z" />
+                        </g>
+                        <g id="oTop">
+                            <path class="oTop"
+                                d="M254.01,113.99c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S220.09,113.99,254.01,113.99    M254.01,56.99c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S355.63,56.99,254.01,56.99L254.01,56.99z" />
+                        </g>
+                    </svg>
+                    <h1 class="count countY"></h1>
+                </div>
             </div>
-            <div class="wins"><svg version="1.1" class="mark side o" id="O_Shape" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve"><g id="shapeShadow"><path class="shapeShadow" d="M245.99,132.01c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S212.06,132.01,245.99,132.01    M245.99,75.01c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S347.61,75.01,245.99,75.01L245.99,75.01z"/></g><g id="oTop"><path class="oTop" d="M254.01,113.99c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S220.09,113.99,254.01,113.99    M254.01,56.99c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S355.63,56.99,254.01,56.99L254.01,56.99z"/></g></svg><h1 class="countY"></h1></div>
-            <!--<div class="addButton"></div>-->
-            <input class="darkSwitch" type="checkbox">
+            <input class="darkSwitch" id="toggleSwitch" type="checkbox">
         </div>
     </div>
 </body>
+
 </html>

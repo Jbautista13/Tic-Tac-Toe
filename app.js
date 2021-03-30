@@ -2,6 +2,8 @@
 var turn = 0;
 var i = 0;
 var winner = false;
+var diagonal = false;
+var displayed = false;
 
 var xImage = '<svg version="1.1" class="mark x" id="X_Shape" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve"><g id="shapeShadow"><rect x="281.55" y="323.71" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -187.5368 322.119)" class="shapeShadow" width="27.02" height="127.46"/><polyline class="shapeShadow" points="148.07,259.55 167.18,240.45 77.05,150.32 57.95,169.42 148.07,259.55 	"/><polyline class="shapeShadow" points="77.05,330.57 57.95,349.68 150.32,442.05 169.43,422.95 77.05,330.57 	"/></g><polygon id="xTop" class="xTop" points="442.05,150.32 349.68,57.95 259.55,148.07 169.43,57.95 77.05,150.32 167.18,240.45 77.05,330.57 169.43,422.95 259.55,332.82 349.68,422.95 442.05,330.57 351.93,240.45 "/> </svg>';
 
@@ -26,7 +28,8 @@ if (localStorage.getItem('theme') != null) {
     }
 }
 
-if (localStorage.getItem('xwins') != null) {
+if (localStorage.getItem('xwins') > 0 || localStorage.getItem('ywins') > 0) {
+    displayScore();
 }
 
 $('.darkSwitch').click(function () {
@@ -46,74 +49,182 @@ $('.darkSwitch').click(function () {
 });
 
 function newGame() {
-
-    $('.header').removeClass('fadeout');
     
     i = 0;
     setTimeout( function () {
+        $('.header').removeClass('fadeout');
         $('.square').removeClass('darken');
         winner = false;
+        diagonal = false;
     }, 520);
     squares = new Array(9);
 
-    $('.gameinfo').html('<h1 class> <svg version="1.1" class="mark side x" id="charSelectX" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve"><g id="shapeShadow"><rect x="281.55" y="323.71" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -187.5368 322.119)" class="shapeShadow" width="27.02" height="127.46"/><polyline class="shapeShadow" points="148.07,259.55 167.18,240.45 77.05,150.32 57.95,169.42 148.07,259.55 	"/><polyline class="shapeShadow" points="77.05,330.57 57.95,349.68 150.32,442.05 169.43,422.95 77.05,330.57 	"/></g><polygon id="xTop" class="xTop" points="442.05,150.32 349.68,57.95 259.55,148.07 169.43,57.95 77.05,150.32 167.18,240.45 77.05,330.57 169.43,422.95 259.55,332.82 349.68,422.95 442.05,330.57 351.93,240.45 "/> </svg> or <svg version="1.1" class="mark side o" id="charSelectO" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve"><g id="shapeShadow"><path class="shapeShadow" d="M245.99,132.01c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S212.06,132.01,245.99,132.01    M245.99,75.01c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S347.61,75.01,245.99,75.01L245.99,75.01z"/></g><g id="oTop"><path class="oTop" d="M254.01,113.99c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S220.09,113.99,254.01,113.99    M254.01,56.99c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S355.63,56.99,254.01,56.99L254.01,56.99z"/></g></svg> </h1>')
+    $('.gameinfo').html('<h1 class> <svg version="1.1" class="mark side x clickable" id="charSelectX" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve" tabindex="0"><g id="shapeShadow"><rect x="281.55" y="323.71" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -187.5368 322.119)" class="shapeShadow" width="27.02" height="127.46"/><polyline class="shapeShadow" points="148.07,259.55 167.18,240.45 77.05,150.32 57.95,169.42 148.07,259.55 	"/><polyline class="shapeShadow" points="77.05,330.57 57.95,349.68 150.32,442.05 169.43,422.95 77.05,330.57 	"/></g><polygon id="xTop" class="xTop" points="442.05,150.32 349.68,57.95 259.55,148.07 169.43,57.95 77.05,150.32 167.18,240.45 77.05,330.57 169.43,422.95 259.55,332.82 349.68,422.95 442.05,330.57 351.93,240.45 "/> </svg> or <svg version="1.1" class="mark side o clickable" id="charSelectO" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve" tabindex="0"><g id="shapeShadow"><path class="shapeShadow" d="M245.99,132.01c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S212.06,132.01,245.99,132.01    M245.99,75.01c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S347.61,75.01,245.99,75.01L245.99,75.01z"/></g><g id="oTop"><path class="oTop" d="M254.01,113.99c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S220.09,113.99,254.01,113.99    M254.01,56.99c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S355.63,56.99,254.01,56.99L254.01,56.99z"/></g></svg> </h1>')
 
-    $('.board').on('click', '#charSelectX', function() {
-        turn = 0;
-        changeGameInfoTurn();
-        $('.header').addClass('fadeout');
-        $('.gameinfo').addClass('movedown');
-        setTimeout(function () {
-            $('.gameinfo').removeClass('movedown');
-            $('.grid').removeClass('hidden');
-        }, 500);
-        setTimeout(function () {
-            $('.grid').addClass('visible');
-        }, 520);
+    $('.board').on('click keypress', '#charSelectX', function(press) {
+        if(clickOrKeyPress(press))
+        {
+            turn = 0;
+            changeGameInfoTurn();
+            $('.header').addClass('fadeout');
+            $('.gameinfo').addClass('movedown');
+            setTimeout(function () {
+                $('.gameinfo').removeClass('movedown');
+                $('.grid').removeClass('hidden');
+            }, 500);
+            setTimeout(function () {
+                $('.grid').addClass('visible');
+            }, 520);
+        }
     });
 
-    $('.board').on('click', '#charSelectO', function() {
-        event.stopImmediatePropagation();
-        turn = 1;
-        changeGameInfoTurn();
-        $('.header').addClass('fadeout');
-        $('.gameinfo').addClass('movedown');
-        setTimeout(function () {
-            $('.gameinfo').removeClass('movedown');
-            $(".grid").removeClass('hidden');
-        }, 500);
-        setTimeout(function () {
-            $('.grid').addClass('visible');
-        }, 520);
+    $('.board').on('click keypress', '#charSelectO', function(press) {
+        if(clickOrKeyPress(press))
+        {
+            turn = 1;
+            changeGameInfoTurn();
+            $('.header').addClass('fadeout');
+            $('.gameinfo').addClass('movedown');
+            setTimeout(function () {
+                $('.gameinfo').removeClass('movedown');
+                $(".grid").removeClass('hidden');
+            }, 500);
+            setTimeout(function () {
+                $('.grid').addClass('visible');
+            }, 520);
+        }
     });
 
 };
 
-$(".square").click(function () {
+function clickOrKeyPress(press) {
+    
+    if (press.type == 'click')
+        return true;
+    else if (press.type == 'keypress') {
+        code = press.charCode || press.keyCode;
+        if((code === 32)|| (code === 13)){
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function displayNoScoresPopup() {
+    $('.mark').attr('tabindex', '-1');
+    $('.darkSwitch').attr('disabled', 'disabled');
+    $('.reset').attr('tabindex', '-1');
+    $('.square').attr('tabindex', '-1');
+
+    $('.noScores').removeClass('hidden');
+    $('.screen').removeClass('hidden');
+    setTimeout(function () {
+        $('.noScores').removeClass('fadeout');
+        $('.screen').removeClass('fadeout');
+    }, 20);
+
+    setTimeout(function () {
+        $('.mark').attr('tabindex', '0');
+        $('.darkSwitch').removeAttr('disabled');
+        $('.reset').attr('tabindex', '0');
+        $('.square').attr('tabindex', '0');
+
+        $('.noScores').addClass('fadeout');
+        $('.screen').addClass('fadeout');
+        setTimeout(function () {
+            $('.noScores').addClass('hidden');
+            $('.screen').addClass('hidden');
+        }, 520);
+    }, 1520);
+}
+
+function displayPopup() {
+    $('.mark').attr('tabindex', '-1');
+    $('.darkSwitch').attr('disabled', 'disabled');
+    $('.reset').attr('tabindex', '-1');
+    $('.square').attr('tabindex', '-1');
+
+    $('.popup').removeClass('hidden');
+    $('.screen').removeClass('hidden');
+    setTimeout(function () {
+        $('.popup').removeClass('fadeout');
+        $('.screen').removeClass('fadeout');
+    }, 20);
+}
+
+function hidePopup() {
+    $('.mark').attr('tabindex', '0');
+    $('.darkSwitch').removeAttr('disabled');
+    $('.reset').attr('tabindex', '0');
+    $('.square').attr('tabindex', '0');
+
+    $('.popup').addClass('fadeout');
+    $('.screen').addClass('fadeout');
+    setTimeout(function () {
+        $('.popup').addClass('hidden');
+        $('.screen').addClass('hidden');
+    }, 520);
+}
+
+$('.score').on('click', function() {
+
+    console.log("helloworld");
+
+    if(localStorage.getItem('xwins') == 0 && localStorage.getItem('ywins') == 0) {
+        displayNoScoresPopup();
+    } else {
+        displayPopup();
+    }
+
+    $('.popup').on('click keypress', '.optionyes', function(press) {
+        if(clickOrKeyPress(press))
+        {
+            localStorage.setItem('xwins', 0);
+            localStorage.setItem('ywins', 0);
+            changeXScore();
+            changeYScore();
+            hidePopup();
+        }
+    });
+
+    $('.popup').on('click keypress', '.optionno', function(press) {
+        if(clickOrKeyPress(press))
+        {
+            hidePopup();
+        }
+    });
+})
+
+$(".square").on('click keypress', function(press) {
     const square = $(this);
 
-    if (winner) {
-        square.toggleClass("i");
-        setTimeout(function () {
+    if(clickOrKeyPress(press))
+    {
+        if (winner) {
             square.toggleClass("i");
-        }, 1250);
-    } else if (square.children('svg')[0] == null) {
-        addMark(square);
-        turn++; i++;
-        if (calculateWin(square.attr("class").split(" ")[1])) {
-            won(turn % 2 == 0);
+            setTimeout(function () {
+                square.toggleClass("i");
+            }, 1250);
+        } else if (square.children('svg')[0] == null) {
+            addMark(square);
+            turn++; i++;
+            if (calculateWin(square.attr("class").split(" ")[1])) {
+                won(turn % 2 == 0);
+            } else {
+                changeGameInfoTurn();
+            }
         } else {
-            changeGameInfoTurn();
-        }
-    } else {
-        square.toggleClass("i");
-        setTimeout(function () {
             square.toggleClass("i");
-        }, 1250);
+            setTimeout(function () {
+                square.toggleClass("i");
+            }, 1250);
+        }
     }
 });
 
 function addMark(x) {
+    x.removeClass('clickable');
     let index = x.attr("class").split(" ")[1];
     if (turn % 2 == 0) {
         x.append(xImage);
@@ -126,16 +237,11 @@ function addMark(x) {
 
 function removeMark() {
 
-    diagonal = $('.grid').attr('class').indexOf("bl") != -1 || $('.grid').attr('class').indexOf("tl") != -1;
-
     console.log(diagonal);
     if (!diagonal) {
-        $('.grid').removeClass($('.grid').attr('class').split(' ').pop());
+        $('.grid').removeClass('extendh extendv');
         setTimeout( function () {
-            $('.grid').removeClass('horizontal center');
-            setTimeout( function () {
-                $('.grid').removeClass($('.grid').attr('class').split(' ').pop());
-            }, 20);
+            $('.grid').removeClass('horizontal vertical center top bottom left middle right');
         }, 200);
     } else {
         $('.grid').removeClass('tl bl');
@@ -143,9 +249,6 @@ function removeMark() {
             $('.grid').removeClass('extendh');
             setTimeout( function () {
                 $('.grid').removeClass('horizontal center');
-                setTimeout( function () {
-                    $('.grid').removeClass('red green');
-                }, 20);
             }, 300);
         }, 400); 
     }
@@ -163,11 +266,15 @@ function changeGameInfoTurn() {
     }
 
     if (i <= 8) {
-        h1.html(image + "'s Turn");
+        if ($('.gameinfo').find('svg').length == 1)
+           $('.gameinfo').find('svg').replaceWith(image);
+        else
+            $('.gameinfo').prepend(image);
+        h1.html("'s Turn");
     } else {
         h1.html("Tied!");
         h1.attr("class", "");
-        $('.gameinfo').prepend('<div class="reset" style="height: calc(var(--squarewidth) / 2); width: var(--gridwidth);position: absolute;"></div>');
+        $('.gameinfo').prepend('<div class="reset" style="height: calc(var(--squarewidth) / 2); width: var(--gridwidth);position: absolute; border-radius: calc(var(--squarewidth) / 10);" tabindex="0"></div>');
         gameOver();
     }
 };
@@ -185,52 +292,104 @@ function darkenTiles(j, f, k) {
 };
 
 function gameOver() {
-    $('body').on('click', '.reset',function () {
-        $('.reset').toggleClass('hidden');
-        setTimeout(function () {
-            $('.square').html(' ');
-            $('.square').find('.mark').removeClass('fadeout');
-            $('.gameinfo').addClass('moveup');
+    $('body').on('click keypress', '.reset', function(press) {
+        if(clickOrKeyPress(press))
+        {
             setTimeout(function () {
-                $('.gameinfo').removeClass('moveup');
-                $('.grid').addClass('hidden');
-            }, 500);
-        }, 520);
-        setTimeout(function () {
-            $('.grid').removeClass('visible');
-        }, 250);
-        if (winner == true) {
-            removeMark();
+                $('.square').html(' ');
+                $('.square').find('.mark').removeClass('fadeout');
+                $('.square').addClass('clickable');
+                $('.gameinfo').addClass('moveup');
+                setTimeout(function () {
+                    $('.gameinfo').removeClass('moveup');
+                    $('.grid').addClass('hidden');
+                }, 500);
+            }, 520);
+            setTimeout(function () {
+                $('.grid').removeClass('visible');
+            }, 250);
+            if (winner == true) {
+                removeMark();
+            }
+            $('.square').find('.mark').addClass('fadeout');
+            newGame();
         }
-        $('.square').find('.mark').addClass('fadeout');
-        newGame();
     });
 };
 
 function won(shape) {
     var image;
     var h1 = $('.gameinfo').children('h1');
+    
     if (shape == 0) {
+        localStorage.setItem('xwins', +localStorage.getItem('xwins')+1);
+        if (!displayed) {
+            displayScore();
+        } else {
+            changeXScore();
+        }
         image = xImage;
         h1.attr("class", "red");
     } else {
+        localStorage.setItem('ywins', +localStorage.getItem('ywins')+1);
         image = oImage;
+        if (!displayed) {
+            displayScore();
+        } else {
+            changeYScore();
+        }
         h1.attr("class", "green");
     }
-    
+
+    $('.square').removeClass('clickable');
+
     winner = true;
-    h1.html(image + " Won!");
-    $('.gameinfo').prepend('<div class="reset" style="height: calc(var(--squarewidth) / 2); width: var(--gridwidth);position: absolute;"></div>');
+    $('.gameinfo').find('svg').replaceWith(image);
+    h1.html(" Won!");
+    $('.gameinfo').prepend('<div class="reset" style="height: calc(var(--squarewidth) / 2); width: var(--gridwidth);position: absolute; border-radius: calc(var(--squarewidth) / 10);" tabindex="0"></div>');
     gameOver();
 }
 
-function markRow(row) {
-    if (turn % 2 == 0) {
-        $('.grid').addClass('red');
-    } else {
-        $('.grid').addClass('green');
+function displayScore() {
+    if (localStorage.getItem('xwins') == null) {
+        localStorage.setItem('xwins', 0);
     }
-    
+    if (localStorage.getItem('ywins') == null) {
+        localStorage.setItem('ywins', 0);
+    }
+    displayed = true;
+    $('.darkSwitch').addClass('movedown');
+    $('.game').addClass('moveleft');
+    setTimeout(function () {
+        $('.darkSwitch').removeClass('movedown');
+        $('.game').removeClass('moveleft');
+        $('.score').removeClass('hidden');
+    }, 500);
+    setTimeout(function () {
+        $('.score').addClass('visible');
+        $('.count').addClass('fadein');
+        $('.countX').html(localStorage.getItem('xwins'));
+        $('.countY').html(localStorage.getItem('ywins'));
+    }, 520);
+}
+
+function changeXScore() {
+    $('.countX').removeClass('fadein');
+    setTimeout(function () {
+        $('.countX').html(localStorage.getItem('xwins'));
+        $('.countX').addClass('fadein');
+    }, 500);
+}
+
+function changeYScore() {
+    $('.countY').removeClass('fadein');
+    setTimeout(function () {
+        $('.countY').html(localStorage.getItem('ywins'));
+        $('.countY').addClass('fadein');
+    }, 500);
+}
+
+function markRow(row) {
     setTimeout(function () {
         switch(row) {
             case 0:
@@ -258,6 +417,7 @@ function markRow(row) {
                 break;
 
             case 6:
+                diagonal = true;
                 $('.grid').addClass('horizontal center extendh');
                 setTimeout(function () {
                     $('.grid').addClass('tl')
@@ -265,6 +425,7 @@ function markRow(row) {
                 break;
 
             case 7:
+                diagonal = true;
                 $('.grid').addClass('horizontal center extendh');
                 setTimeout(function () {
                     $('.grid').addClass('bl')

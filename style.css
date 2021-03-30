@@ -21,15 +21,17 @@ h1 {
     height: 100%;
     display: flex;
     align-items: center;
-    text-shadow: 0px 0px var(--dropshadowradius) var(--dropShadowMark);
+    text-shadow: 0px 0px var(--scale) var(--dropShadowMark);
 }
 
 h1.red {
     color: var(--red_color);
+    opacity: .75;
 }
 
 h1.green {
     color: var(--green_color);
+    opacity: .75;
 }
 
 h1.red.noJS {
@@ -39,6 +41,7 @@ h1.red.noJS {
 
 .header {
     position: absolute;
+    transition: opacity .5s ease-in-out;
     top: 0;
 }
 
@@ -54,7 +57,11 @@ span {
 }
 
 span.green {
-    text-shadow: 0.25px 0.25px hsl(142deg 78% 72%), 0.5px 0.5px hsl(142deg 78% 72%), 0.75px 0.75px hsl(142deg 78% 72%), 1px 1px hsl(142deg 78% 72%), 1.25px 1.25px hsl(142deg 78% 72%), 1.5px 1.5px hsl(142deg 78% 72%), 1.75px 1.75px hsl(142deg 78% 72%), 2px 2px hsl(142deg 78% 72%), 2.25px 2.25px hsl(142deg 78% 72%), 2.5px 2.5px hsl(142deg 78% 72%), 2.75px 2.75px hsl(142deg 78% 72%), 3px 3px hsl(142deg 78% 72%), 10px 10px 30px rgba(0,0,0,.7);
+    text-shadow: 0.25px 0.25px hsl(142deg 78% 72%), 0.5px 0.5px hsl(142deg 78% 72%), 0.75px 0.75px hsl(142deg 78% 72%), 1px 1px hsl(142deg 78% 72%), 1.25px 1.25px hsl(142deg 78% 72%), 1.5px 1.5px hsl(142deg 78% 72%), 1.75px 1.75px hsl(142deg 78% 72%), 2px 2px hsl(142deg 78% 72%), 2.25px 2.25px hsl(142deg 78% 72%), 2.5px 2.5px hsl(142deg 78% 72%), 2.75px 2.75px hsl(142deg 78% 72%), 3px 3px hsl(142deg 78% 72%), calc(var(--fontsize) / 5) calc(var(--fontsize) / 5) calc(var(--fontsize) * .6) rgba(0,0,0,.7);
+}
+
+span.red {
+    text-shadow: 0.25px 0.25px hsl(359deg 78% 72%), 0.5px 0.5px hsl(359deg 78% 72%), 0.75px 0.75px hsl(359deg 78% 72%), 1px 1px hsl(359deg 78% 72%), 1.25px 1.25px hsl(359deg 78% 72%), 1.5px 1.5px hsl(359 78% 72% / 1), 1.75px 1.75px hsl(359deg 78% 72%), 2px 2px hsl(359 78% 72% / 1), 2.25px 2.25px hsl(359deg 78% 72%), 2.5px 2.5px hsl(359deg 78% 72%), 2.75px 2.75px hsl(359deg 78% 72%), 3px 3px hsl(359deg 78% 72%), calc(var(--fontsize) / 5) calc(var(--fontsize) / 5) calc(var(--fontsize) * .6) rgba(0,0,0,.7);
 }
 
 span.firstword {
@@ -63,13 +70,33 @@ span.firstword {
 
 span.secondword {
     transform: rotate(1deg);
-    text-shadow: 0.25px 0.25px hsl(359deg 78% 72%), 0.5px 0.5px hsl(359deg 78% 72%), 0.75px 0.75px hsl(359deg 78% 72%), 1px 1px hsl(359deg 78% 72%), 1.25px 1.25px hsl(359deg 78% 72%), 1.5px 1.5px hsl(359 78% 72% / 1), 1.75px 1.75px hsl(359deg 78% 72%), 2px 2px hsl(359 78% 72% / 1), 2.25px 2.25px hsl(359deg 78% 72%), 2.5px 2.5px hsl(359deg 78% 72%), 2.75px 2.75px hsl(359deg 78% 72%), 3px 3px hsl(359deg 78% 72%), 10px 10px 30px rgba(0,0,0,.7);
     margin-right: .5em;
 }
 
 span.thirdword {
     margin-left: 1em;
     transform: rotate(-1deg);
+}
+
+.optionyes {
+    margin-right: 5vmin;
+    cursor: pointer;
+    filter: brightness(1);
+}
+
+.optionno {
+    margin-left: 5vmin;
+    cursor: pointer;
+    filter: brightness(1);
+}
+
+.optionno:focus-visible,
+.optionyes:focus-visible,
+.optionyes:hover,
+.optionno:hover {
+    transition: filter .125s ease-in;
+    filter: brightness(0.95) !important;
+    transform: scale(.95);
 }
 
 .game {
@@ -99,18 +126,11 @@ span.thirdword {
     content: '';
     width: 0;
     height: 0;
+    background-color: var(--bgColor);
     position: absolute;
     z-index: 3;
     border-radius: 20px;
-    filter: drop-shadow(-2px 4px 5px var(--dropShadowMark));
-}
-
-.grid.red:before {
-    background-color: var(--bgColor);
-}
-
-.grid.green:before {
-    background-color: var(--bgColor);
+    filter: drop-shadow(calc(var(--scale) * -.2) calc(var(--scale) * .5) calc(var(--scale) * .8) var(--dropShadowMark));
 }
 
 .grid.vertical:before {
@@ -183,6 +203,29 @@ span.thirdword {
     margin: var(--square_margin);
 }
 
+.square:focus-visible {
+    box-shadow: 0 0 8px 2px #1a1a1a;
+    outline: none;
+}
+
+.noScores,
+.popup {
+    position: absolute;
+    opacity: 1;
+    z-index: 5;
+    transition: opacity .5s ease-in-out;
+    transition-delay: 250ms;
+}
+
+.screen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 4;
+    backdrop-filter: blur(5px);
+    transition: opacity .5s ease-in-out;
+}
+
 .i {
     animation-name: blip;
     animation-duration: 1250ms;
@@ -203,11 +246,16 @@ span.thirdword {
     z-index: 2;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
+.markScore,
 .mark {
     height: 100%;
     opacity: .75;
     z-index: 1;
-    filter: drop-shadow(calc(var(--dropshadowscale) / -5) calc(var(--dropshadowscale) / 2.5) calc(var(--dropshadowscale) / 2) var(--dropShadowMark));
+    filter: drop-shadow(calc(var(--scale) / -5) calc(var(--scale) / 2.5) calc(var(--scale) / 2) var(--dropShadowMark));
 }
 
 .mark.touched {
@@ -228,6 +276,28 @@ span.thirdword {
     fill: #66fb9a;
 }
 
+#charSelectX:focus-visible {
+    box-shadow: 0 0 calc(var(--scale) * .7) calc(var(--scale) * .4) #1a1a1a;
+    outline: none;
+    border: calc(var(--scale) * .4) solid #1a1a1a;
+    border-radius: calc(var(--scale) * .6);
+    margin-right: calc(var(--scale) * .8);
+}
+
+#charSelectO:focus-visible {
+    box-shadow: 0 0 calc(var(--scale) * .7) calc(var(--scale) * .4) #1a1a1a;
+    outline: none;
+    border: calc(var(--scale) * .4) solid #1a1a1a;
+    border-radius: calc(var(--scale) * .6);
+    margin-left: calc(var(--scale) * .8);
+}
+
+#charSelectO:focus,
+#charSelectX:focus,
+.score {
+    outline: none;
+}
+
 .gameinfo {
     width: var(--gridwidth);
     height: calc(var(--squarewidth) / 2);
@@ -237,6 +307,11 @@ span.thirdword {
     justify-content: center;
     background-color: var(--rectColor);
     border-radius: calc(var(--squarewidth) / 10);
+}
+
+.game.moveleft {
+    transform: translateX(calc(-.5 * ((var(--scale) * 7.7) - var(--lightwidth))));
+    transition: transform .5s ease-out;
 }
 
 .gameinfo.movedown {
@@ -249,21 +324,41 @@ span.thirdword {
     transition: transform .5s ease-out;
 }
 
+.darkSwitch.movedown {
+    transform: translateY(calc(.5vmin + var(--winsheight)));
+    transition: transform .5s ease-out;
+}
+
+.reset:focus-visible {
+    box-shadow: 0 0 calc(var(--scale) * 1) calc(var(--scale) * .3) #1a1a1a;
+    outline: none;
+}
+
 .selections {
     margin-right: calc(var(--gridwidth) * 0.035);
+    display: flex;
+    flex-direction: column;
+}
+
+.score {
+    margin-bottom: .5vmin;
+    opacity: 0;
+    transition: opacity .5s ease-in;
+    cursor: pointer;
 }
 
 .wins {
-    width: var(--winsheight);
+    width: calc(var(--scale) * 7.7);
     height: var(--winsheight);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: width .5s ease-in;
 }
 
 .count {
-    width: var(--winswidth);
+    font-size: calc(var(--scale) * 2.7);
+    opacity: 0;
+    transition: opacity .5s ease-in;
 }
 
 .addButton {
@@ -298,8 +393,8 @@ span.thirdword {
 }
 
 .darken {
-    transition: all .25s ease-in;
-    filter: brightness(.25);
+    transition: all .5s ease-in;
+    filter: drop-shadow(calc(var(--scale) / -5) calc(var(--scale) / 2.5) calc(var(--scale) / 2) var(--dropShadowMark)) brightness(0.25);
 }
 
 .rainbow {
@@ -316,15 +411,18 @@ input[type="checkbox"] {
     height: var(--lightheight);
     border-radius: calc(var(--lightheight) / 1.5);
     margin: 0;
-    margin-top: 8px;
-    margin-left: 1px;
+    cursor: pointer;
 }
 
-input:focus {
+:focus {
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
     outline: none;
+}
+
+input:focus-visible {
+    box-shadow: 0 0 3px 2px #1a1a1a;
 }
 
 input:checked[type="checkbox"] {
@@ -357,7 +455,10 @@ input:checked[type="checkbox"]:before {
 
 .fadein {
     opacity: 1;
-    transition: opacity .5s ease-in-out;
+}
+
+.popup.fadeout {
+    transition-delay: 0ms;
 }
 
 .fadeout {
@@ -403,54 +504,39 @@ input:checked[type="checkbox"]:before {
     100% { filter: hue-rotate(0deg); }
 }
 
-@media screen and (max-width: 349px) {
-    :root {
-        --squarewidth: 65px;
-    }
-}  
+@media screen and (max-width: 750px) {
 
-@media screen and (min-width: 350px) {
     :root {
-        --squarewidth: 20vmin;
-        --fontsize: 7vmin;
-        --dropshadowradius: 1vmin;
-        --dropshadowscale: 1vmin;
+        --scale: 1.4vmin;
     }
 
-    .selections {
-        --winswidth: 60px;
-        --winsheight: 8.5vmin;
-        --lightwidth: calc(var(--winsheight) * 1.45);
-        --lightheight: calc(var(--lightwidth) * .44);
-    }
 }
 
 @media screen and (min-width: 750px) {
+    
     :root {
-        --squarewidth: 15vmin;
-        --fontsize: 5vmin;
-        --dropshadowradius: 1vmin;
-        --dropshadowscale: 1vmin;
+        --scale: 1vmin;
     }
 
-    .selections {
-        --winswidth: 85px;
-        --winsheight: 4.5vmin;
-        --lightwidth: calc(var(--winsheight) * 1.45);
-        --lightheight: calc(var(--lightwidth) * .44);
-    }
 }
 
 :root {
+    --fontsize: calc(var(--scale) * 5);
+    --squarewidth: calc(var(--scale) * 15);
+
     --gridwidth: calc(var(--squarewidth) * 3 + (var(--square_margin) * 6));
-    --marginbottom: calc(var(--gridwidth) * .01754386);
-    --margin: 1em;
+    --marginbottom: calc(var(--gridwidth) * .0175);
     --square_margin: calc(var(--squarewidth) * 0.0125);
     --gameinfoY: calc(calc((var(--gridwidth) / 2) + (var(--marginbottom) / 2)));
     --dropShadowMark: black;
+    --margin: 1em;
 
-    --red_color: #ef8080;
+    --red_color: #fb6666;
     --green_color: #66fb9a;
+
+    --winsheight: calc(var(--scale) * 4.5);
+    --lightwidth: calc(var(--winsheight) * 1.45);
+    --lightheight: calc(var(--lightwidth) * .44);
 }
 
 .light {
