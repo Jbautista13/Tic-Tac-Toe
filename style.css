@@ -406,6 +406,7 @@ span.thirdword {
     -moz-appearance: none;
     -webkit-appearance: none;
     outline: none;
+    border: none;
 }
 
 input[type="checkbox"] {
@@ -413,6 +414,7 @@ input[type="checkbox"] {
     -moz-appearance: none;
     -webkit-appearance: none;
     outline: none;
+    border: none;
     background: var(--rectColor);
     width: var(--lightwidth);
     height: var(--lightheight);
