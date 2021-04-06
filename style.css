@@ -12,6 +12,7 @@ body {
     align-items: center;
     background: var(--bgColor);
     transition: background 750ms ease-in-out;
+    -webkit-tap-highlight-color: transparent;
 }
 
 h1 {
@@ -22,6 +23,8 @@ h1 {
     display: flex;
     align-items: center;
     text-shadow: 0px 0px var(--scale) var(--dropShadowMark);
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 h1.red {
@@ -104,7 +107,6 @@ span.thirdword {
     display: flex;
     justify-content: center;
     align-items: center;
-    -webkit-tap-highlight-color: transparent;
 }
 
 .board {
@@ -371,7 +373,7 @@ span.thirdword {
 }
 
 .score {
-    margin-bottom: .5vmin;
+    margin-bottom: 1vmin;
     opacity: 0;
     transition: opacity .5s ease-in;
     cursor: pointer;
