@@ -4,6 +4,7 @@ var i = 0;
 var winner = false;
 var diagonal = false;
 var displayed = false;
+var column = 0;
 
 var xImage = '<svg version="1.1" class="mark x" id="X_Shape" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve"><g id="shapeShadow"><rect x="281.55" y="323.71" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -187.5368 322.119)" class="shapeShadow" width="27.02" height="127.46"/><polyline class="shapeShadow" points="148.07,259.55 167.18,240.45 77.05,150.32 57.95,169.42 148.07,259.55 	"/><polyline class="shapeShadow" points="77.05,330.57 57.95,349.68 150.32,442.05 169.43,422.95 77.05,330.57 	"/></g><polygon id="xTop" class="xTop" points="442.05,150.32 349.68,57.95 259.55,148.07 169.43,57.95 77.05,150.32 167.18,240.45 77.05,330.57 169.43,422.95 259.55,332.82 349.68,422.95 442.05,330.57 351.93,240.45 "/> </svg>';
 
@@ -108,7 +109,7 @@ function clickOrKeyPress(press) {
     if (press.type == 'click')
         return true;
     else if (press.type == 'keypress') {
-        code = press.charCode || press.keyCode;
+        code = press.charCode || press.charCode;
         if((code === 32)|| (code === 13)){
             return true;
         }
@@ -117,8 +118,120 @@ function clickOrKeyPress(press) {
     return false;
 }
 
+$('body').keydown(function(keyPress) {
+    
+    current = $(':focus')[0];
+    currentIndex = $(':tabbable').index(current);
+    numElements = $(':tabbable').length;
+
+    if (numElements > 2)
+        numElements--;
+
+    console.log(keyPress.which);
+
+    switch(keyPress.which)
+    {
+        case 65:
+        case 37:
+            if (current == null || currentIndex == numElements)
+                $(':tabbable')[0].focus();
+            else if (numElements == 2)
+                $(':tabbable')[(currentIndex + 1) % 2].focus();
+            else if (numElements == 9)
+            {
+                if (currentIndex % 3 == 0)
+                    $(':tabbable')[currentIndex + 2].focus();
+                else
+                    $(':tabbable')[currentIndex - 1].focus();
+            }
+            else
+            {
+                if (currentIndex != 9 && currentIndex % 3 == 0)
+                    $(':tabbable')[currentIndex + 2].focus();
+                else if (currentIndex != 9)
+                    $(':tabbable')[currentIndex - 1].focus();
+            }
+            break;
+        case 68:
+        case 39:
+            if (current == null || currentIndex == numElements)
+                $(':tabbable')[0].focus();
+            else if (numElements == 2)
+                $(':tabbable')[(currentIndex + 1) % 2].focus();
+            else if (numElements == 9)
+            {
+                if (currentIndex % 3 == 2)
+                    $(':tabbable')[currentIndex - 2].focus();
+                else
+                    $(':tabbable')[currentIndex + 1].focus();
+            }
+            else
+            {
+                if (currentIndex != 9 && currentIndex % 3 == 2)
+                    $(':tabbable')[currentIndex - 2].focus();
+                else if (currentIndex != 9)
+                    $(':tabbable')[currentIndex + 1].focus();
+            }
+            break;
+        case 87:
+        case 38:
+            if (current == null || currentIndex == numElements)
+                $(':tabbable')[0].focus();
+            else if (numElements == 2)
+                $(':tabbable')[(currentIndex + 1) % 2].focus();
+            else if (numElements == 9)
+            {
+                if (Math.floor(currentIndex / 3) == 0)
+                    $(':tabbable')[currentIndex + 6].focus();
+                else
+                    $(':tabbable')[currentIndex - 3].focus();
+            }
+            else
+            {
+                
+                if (currentIndex != 9 && Math.floor(currentIndex / 3) == 0) {
+                    $(':tabbable')[9].focus();
+                    column = currentIndex % 3;
+                }
+                else if (currentIndex != 9)
+                    $(':tabbable')[currentIndex - 3].focus();
+                else
+                    $(':tabbable')[currentIndex - (3 - column)].focus();
+            }
+            break;
+        case 83:
+        case 40:
+            if (current == null || currentIndex == numElements)
+                $(':tabbable')[0].focus();
+            else if (numElements == 2)
+                $(':tabbable')[(currentIndex + 1) % 2].focus();
+            else if (numElements == 9)
+            {
+                if (Math.floor(currentIndex / 3) == 2)
+                    $(':tabbable')[currentIndex - 6].focus();
+                else
+                    $(':tabbable')[currentIndex + 3].focus();
+            }
+            else
+            {
+                if (currentIndex != 9 && Math.floor(currentIndex / 3) == 2) {
+                    $(':tabbable')[9].focus();
+                    column = currentIndex % 3;
+                }
+                else if (currentIndex != 9) {
+                    $(':tabbable')[currentIndex + 3].focus();
+                    column = currentIndex % 3;
+                }
+                else {
+                    $(':tabbable')[currentIndex - (9 - column)].focus();
+                }
+            }
+            break;
+    }
+});
+
 function displayNoScoresPopup() {
-    $('.mark').attr('tabindex', '-1');
+    $('.mark.clickable').attr('tabindex', '-1');
     $('.darkSwitch').attr('disabled', 'disabled');
     $('.reset').attr('tabindex', '-1');
     $('.square').attr('tabindex', '-1');
@@ -131,7 +244,7 @@ function displayNoScoresPopup() {
     }, 20);
 
     setTimeout(function () {
-        $('.mark').attr('tabindex', '0');
+        $('.mark.clickable').attr('tabindex', '0');
         $('.darkSwitch').removeAttr('disabled');
         $('.reset').attr('tabindex', '0');
         $('.square').attr('tabindex', '0');
@@ -146,7 +259,7 @@ function displayNoScoresPopup() {
 }
 
 function displayPopup() {
-    $('.mark').attr('tabindex', '-1');
+    $('.mark.clickable').attr('tabindex', '-1');
     $('.darkSwitch').attr('disabled', 'disabled');
     $('.reset').attr('tabindex', '-1');
     $('.square').attr('tabindex', '-1');
@@ -160,7 +273,7 @@ function displayPopup() {
 }
 
 function hidePopup() {
-    $('.mark').attr('tabindex', '0');
+    $('.mark.clickable').attr('tabindex', '0');
     $('.darkSwitch').removeAttr('disabled');
     $('.reset').attr('tabindex', '0');
     $('.square').attr('tabindex', '0');
