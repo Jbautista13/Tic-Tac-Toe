@@ -12,6 +12,8 @@ var oImage = '<svg version="1.1" class="mark y" id="O_Shape" xmlns="http://www.w
 var squares = new Array(9);
 
 window.onload = function() {
+    if ((window.navigator.standalone) || (window.matchMedia('(display-mode: standalone)').matches))
+        $('#viewport').attr('content', 'width=device-width, initial-scale=1.0, user-scalable=no')
     newGame();
 };
 
