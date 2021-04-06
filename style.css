@@ -40,7 +40,7 @@ h1.red.noJS {
 }
 
 .header {
-    position: absolute;
+    position: fixed;
     transition: opacity .5s ease-in-out;
     top: 0;
 }
@@ -100,6 +100,7 @@ span.thirdword {
 }
 
 .game {
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -213,7 +214,7 @@ span.thirdword {
 
 .noScores,
 .popup {
-    position: absolute;
+    position: fixed;
     opacity: 1;
     z-index: 5;
     transition: opacity .5s ease-in-out;
@@ -223,7 +224,7 @@ span.thirdword {
 .screen {
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed;
     z-index: 4;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
