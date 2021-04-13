@@ -339,8 +339,8 @@ span.thirdword {
     transition: opacity .25s ease-in-out;
 }
 
-.game.moveleft {
-    transform: translateX(calc(-.5 * ((var(--scale) * 7.7) - var(--lightwidth))));
+.board.moveleft {
+    transform: translateX(calc(-.5 * ((var(--winsheight) * 1.71) - var(--lightwidth))));
     transition: transform .5s ease-out;
 }
 
@@ -355,7 +355,7 @@ span.thirdword {
 }
 
 .darkSwitch.movedown {
-    transform: translateY(calc(.5vmin + var(--winsheight)));
+    transform: translate(calc(-.5 * ((var(--winsheight) * 1.71) - var(--lightwidth))), calc(.5vmin + var(--winsheight)));
     transition: transform .5s ease-out;
 }
 
@@ -374,10 +374,12 @@ span.thirdword {
     margin-bottom: 1vmin;
     opacity: 0;
     transition: opacity .5s ease-in;
+    display: flex;
+    flex-direction: column;
 }
 
 .wins {
-    width: calc(var(--scale) * 7.7);
+    width: calc(var(--winsheight) * 1.71);
     height: var(--winsheight);
     display: flex;
     align-items: center;
@@ -385,9 +387,67 @@ span.thirdword {
 }
 
 .count {
-    font-size: calc(var(--scale) * 2.7);
+    font-size: calc(var(--winsheight) * .6);
     opacity: 0;
     transition: opacity .5s ease-in;
+}
+
+@media screen and (max-width: 750px) and (orientation: portrait) and (max-aspect-ratio: 2 / 3) {
+
+    :root {
+        --scale: 1.9vmin !important;
+        --winsheight: calc(var(--scale) * 6) !important;
+    }
+
+    .board.moveleft {
+        transform: translateY(calc((var(--winsheight) - var(--lightheight)) / -2));
+        transition: transform .5s ease-out;
+    }
+
+    .darkSwitch.movedown {
+        transform: translateX(
+            calc((var(--winsheight) * 1.71) + 3vmin)
+            );
+        transition: transform .5s ease-out;
+    }    
+
+    .selections.movedown {
+        transform: translateY(var(--gameinfoY));
+        transition: transform .5s ease-out;
+    }
+    
+    .selections.moveup {
+        transform: translateY(calc( -1 * var(--gameinfoY) ));
+        transition: transform .5s ease-out;
+    }
+
+    .game {
+        flex-direction: column;
+    }
+
+    .board {
+        margin-top: calc(var(--winsheight) + (var(--gridwidth) * 0.035));
+    }
+
+    .selections,
+    .score {
+        flex-direction: row;
+        margin: 0;
+        align-items: center;
+    }
+
+    .noScores,
+    .popup,
+    .header {
+        --scale: 1.4vmin;
+        --fontsize: calc(var(--scale) * 5);
+    }
+
+    .wins + .wins {
+        margin-left: 3vmin;
+        margin-right: 3vmin;
+    }
+
 }
 
 .addButton {
@@ -544,6 +604,7 @@ input:checked[type="checkbox"]:before {
 
     :root {
         --scale: 1.4vmin;
+        --winsheight: calc(var(--scale) * 6) !important;
     }
 
 }

@@ -74,9 +74,9 @@ function newGame() {
             turn = 0;
             changeGameInfoTurn();
             $('.header').addClass('fadeout');
-            $('.informationbar').addClass('movedown');
+            $('.informationbar, .selections').addClass('movedown');
             setTimeout(function () {
-                $('.informationbar').removeClass('movedown');
+                $('.informationbar, .selections').removeClass('movedown');
                 $('.grid').removeClass('hidden');
             }, 500);
             setTimeout(function () {
@@ -91,9 +91,9 @@ function newGame() {
             turn = 1;
             changeGameInfoTurn();
             $('.header').addClass('fadeout');
-            $('.informationbar').addClass('movedown');
+            $('.informationbar, .selections').addClass('movedown');
             setTimeout(function () {
-                $('.informationbar').removeClass('movedown');
+                $('.informationbar, .selections').removeClass('movedown');
                 $(".grid").removeClass('hidden');
             }, 500);
             setTimeout(function () {
@@ -126,8 +126,6 @@ $('body').keydown(function(keyPress) {
 
     if (numElements > 2)
         numElements--;
-
-    console.log(keyPress.which);
 
     switch(keyPress.which)
     {
@@ -353,7 +351,6 @@ function addMark(x) {
 };
 
 function removeMark() {
-    console.log(diagonal);
     if (!diagonal) {
         $('.grid').removeClass('extendh extendv');
         setTimeout( function () {
@@ -431,9 +428,9 @@ function gameOver() {
                 $('.square').html(' ');
                 $('.square').find('.mark').removeClass('fadeout');
                 $('.square').addClass('clickable');
-                $('.informationbar').addClass('moveup');
+                $('.informationbar, .selections').addClass('moveup');
                 setTimeout(function () {
-                    $('.informationbar').removeClass('moveup');
+                    $('.informationbar, .selections').removeClass('moveup');
                     $('.grid').addClass('hidden');
                 }, 500);
             }, 520);
@@ -499,10 +496,10 @@ function displayScore() {
     }
     displayed = true;
     $('.darkSwitch').addClass('movedown');
-    $('.game').addClass('moveleft');
+    $('.board').addClass('moveleft');
     setTimeout(function () {
         $('.darkSwitch').removeClass('movedown');
-        $('.game').removeClass('moveleft');
+        $('.board').removeClass('moveleft');
         $('.score').removeClass('hidden');
     }, 500);
     setTimeout(function () {

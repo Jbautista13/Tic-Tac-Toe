@@ -12,16 +12,15 @@
     
     
     <link rel="manifest" href="./site.webmanifest">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,800;1,800&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,800;1,800&amp;display=swap" crossorigin="anonymous" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script defer="" src="app.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js')
-            .then(function(registration) {
-              console.log('Registration successful');
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js');
             })
         }
     </script>
@@ -541,10 +540,8 @@
                      M1337.02,1138.04c-13.39,0-24.59,4.22-33.61,12.66s-14.31,21.68-15.86,39.72l97.78,0c-0.39-15.91-4.9-28.62-13.53-38.12
                     C1363.16,1142.8,1351.57,1138.04,1337.02,1138.04z"></path>
             </g>
-            <g id="Tic" style="
-            ">
-                <g id="Tic_Shadow" style="
-            ">
+            <g id="Tic"">
+                <g id="Tic_Shadow">
                     <path class="st2" d="M1002.17,487c-53.9,1.88-95.28-11.23-124.11-39.34c-28.84-28.11-44.21-69.41-46.11-123.89
                         c-1.91-54.68,11.64-97.56,40.64-128.67c29-31.1,71.23-47.62,126.69-49.56c38.2-1.33,74.45,5.75,108.77,21.24L1077.53,252
                         c-13.98-5.53-26.84-9.88-38.6-13.07c-11.76-3.18-23.94-4.55-36.54-4.11c-18.42,0.64-32.42,8.32-42,23.02
