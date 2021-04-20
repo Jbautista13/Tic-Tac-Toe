@@ -1,3 +1,9 @@
+* {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
 html,
 body {
     height: 100%;
@@ -23,8 +29,7 @@ h1 {
     display: flex;
     align-items: center;
     text-shadow: 0px 0px var(--scale) var(--dropShadowMark);
-    user-select: none;
-    -webkit-user-select: none;
+    transition: text-shadow 750ms ease-in-out;
 }
 
 h1.red {
@@ -205,6 +210,7 @@ span.thirdword {
     overflow: hidden;
     float: left;
     margin: var(--square_margin);
+    transition: background 750ms ease-in-out;
 }
 
 .square:focus-visible {
@@ -256,7 +262,11 @@ span.thirdword {
 }
 
 .mark {
-    transition: opacity .5s ease-in-out;
+    transition: filter 750ms ease-in-out, opacity .5s ease-in-out;
+}
+
+.markScore {
+    transition: filter 750ms ease-in-out;
 }
 
 .markScore,
@@ -287,7 +297,7 @@ span.thirdword {
 
 .turnInfoText {
     text-shadow:
-        -.25px .25px 0 #262322,
+        -.25px .25px 0 var(--accent),
         -.5px .5px 0 var(--accent),
         -.75px .75px 0 var(--accent),
         -1px 1px 0 var(--accent),
@@ -300,6 +310,7 @@ span.thirdword {
         -2.75px 2.75px 0 var(--accent),
         -3px 3px 0 var(--accent);
     filter: drop-shadow(calc(var(--scale) / -5) calc(var(--scale) / 2.5) calc(var(--scale) / 2) var(--dropShadowMark));
+    transition: filter 750ms ease-in-out;
 }
 
 #charSelectX:focus-visible {
@@ -327,6 +338,7 @@ span.thirdword {
 .informationbar {
     background-color: var(--rectColor);
     border-radius: calc(var(--squarewidth) / 10);
+    transition: background 750ms ease-in-out;
 }
 
 .gameinfo {
@@ -389,7 +401,7 @@ span.thirdword {
 .count {
     font-size: calc(var(--winsheight) * .6);
     opacity: 0;
-    transition: opacity .5s ease-in;
+    transition: text-shadow 750ms ease-in-out, opacity .5s ease-in;
 }
 
 @media screen and (max-width: 750px) and (orientation: portrait) and (max-aspect-ratio: 2 / 3) {
@@ -490,14 +502,6 @@ span.thirdword {
     animation: rainbow 1s forwards infinite;
 }
 
-#toggleSwitch {
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    outline: none;
-    border: none;
-}
-
 input[type="checkbox"] {
     appearance: none;
     -moz-appearance: none;
@@ -509,6 +513,8 @@ input[type="checkbox"] {
     height: var(--lightheight);
     border-radius: calc(var(--lightheight) / 1.5);
     margin: 0;
+    position: relative;
+    transition: background 750ms ease-in-out;
 }
 
 :focus {
@@ -522,12 +528,9 @@ input:focus-visible {
     box-shadow: 0 0 3px 2px #1a1a1a;
 }
 
-input:checked[type="checkbox"] {
-    background: rgba(0, 0, 0, 0.15);
-}
-
 input[type="checkbox"]:before {
-    float: left;
+    position: absolute;
+    left: 0;
     width: var(--lightheight);
     height: var(--lightheight);
     border-radius: 50%;
@@ -536,18 +539,11 @@ input[type="checkbox"]:before {
     content: ' ';
     transform: scale(.75);
     transform-origin: center center;
+    transition: left 125ms ease-in-out, background 750ms ease-in-out;
 }
 
 input:checked[type="checkbox"]:before {
-    float: right;
-    width: var(--lightheight);
-    height: var(--lightheight);
-    border-radius: 50%;
-    background: var(--accent);
-    display: block;
-    content: ' ';
-    transform: scale(.75);
-    transform-origin: center center;
+    left: calc(var(--lightwidth) - var(--lightheight));
 }
 
 .fadein {
@@ -600,7 +596,7 @@ input:checked[type="checkbox"]:before {
     100% { filter: hue-rotate(0deg); }
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 950px) {
 
     :root {
         --scale: 1.4vmin;
@@ -609,7 +605,7 @@ input:checked[type="checkbox"]:before {
 
 }
 
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 950px) {
     
     :root {
         --scale: 1vmin;
@@ -637,17 +633,30 @@ input:checked[type="checkbox"]:before {
 }
 
 .light {
-    --rectColor: rgba(29, 29, 29, 0.15);
+    --rectColor: hsl(0deg 0% 80%);
     --bgColor: #ebebeb;
     --accent: #262322;
     --shadowColor: #1a1a1a;
 }
 
 .dark {
-    --rectColor: rgba(0, 0, 0, 0.3);
+    --rectColor: hsl(0deg 0% 7%);
     --bgColor: #1c1c1c;
     --accent: #ebebeb;
+    --accent: hsl(0deg 0% 20%);
     --shadowColor: #ebebeb;
+}
+
+.dark input[type="checkbox"]:before {
+    background: #ebebeb;
+}
+
+.dark h1 {
+    text-shadow: 0px 0px var(--scale) #00000000;
+}
+
+.dark :is(.markScore,.mark:not(.darken),.turnInfoText,#Tic_Tac_Toe) {
+    filter: drop-shadow(calc(var(--scale) * -.2) calc(var(--scale) * .5) calc(var(--scale) * .8) #00000000) !important;
 }
 
 .blue {

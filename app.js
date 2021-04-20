@@ -317,10 +317,13 @@ $(".square").on('click keypress', function(press) {
     if(clickOrKeyPress(press))
     {
         if (winner) {
-            square.addClass("i");
-            setTimeout(function () {
-                square.removeClass("i");
-            }, 1250);
+            if (!square.hasClass('i'))
+            {
+                square.addClass("i");
+                setTimeout(function () {
+                    square.removeClass("i");
+                }, 1250);
+            }
         } else if (square.children('svg')[0] == null) {
             addMark(square);
             turn++; i++;
@@ -330,10 +333,13 @@ $(".square").on('click keypress', function(press) {
                 changeGameInfoTurn();
             }
         } else {
-            square.addClass("i");
-            setTimeout(function () {
-                square.removeClass("i");
-            }, 1250);
+            if (!square.hasClass('i'))
+            {
+                square.addClass("i");
+                setTimeout(function () {
+                    square.removeClass("i");
+                }, 1250);
+            }
         }
     }
 });
