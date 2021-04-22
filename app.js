@@ -6,9 +6,9 @@ var diagonal = false;
 var displayed = false;
 var column = 0;
 
-var xImage = '<svg version="1.1" class="mark x" id="X_Shape" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve"><g id="shapeShadow"><rect x="281.55" y="323.71" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -187.5368 322.119)" class="shapeShadow" width="27.02" height="127.46"/><polyline class="shapeShadow" points="148.07,259.55 167.18,240.45 77.05,150.32 57.95,169.42 148.07,259.55 	"/><polyline class="shapeShadow" points="77.05,330.57 57.95,349.68 150.32,442.05 169.43,422.95 77.05,330.57 	"/></g><polygon id="xTop" class="xTop" points="442.05,150.32 349.68,57.95 259.55,148.07 169.43,57.95 77.05,150.32 167.18,240.45 77.05,330.57 169.43,422.95 259.55,332.82 349.68,422.95 442.05,330.57 351.93,240.45 "/> </svg>';
+var xImage = '<div class="svg-wrapper"><svg version="1.1" class="mark x" id="X_Shape" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve"><g id="shapeShadow"><rect x="281.55" y="323.71" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -187.5368 322.119)" class="shapeShadow" width="27.02" height="127.46"/><polyline class="shapeShadow" points="148.07,259.55 167.18,240.45 77.05,150.32 57.95,169.42 148.07,259.55 	"/><polyline class="shapeShadow" points="77.05,330.57 57.95,349.68 150.32,442.05 169.43,422.95 77.05,330.57 	"/></g><polygon id="xTop" class="xTop" points="442.05,150.32 349.68,57.95 259.55,148.07 169.43,57.95 77.05,150.32 167.18,240.45 77.05,330.57 169.43,422.95 259.55,332.82 349.68,422.95 442.05,330.57 351.93,240.45 "/> </svg></div>';
 
-var oImage = '<svg version="1.1" class="mark y" id="O_Shape" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve"><g id="shapeShadow"><path class="shapeShadow" d="M245.99,132.01c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S212.06,132.01,245.99,132.01    M245.99,75.01c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S347.61,75.01,245.99,75.01L245.99,75.01z"/></g><g id="oTop"><path class="oTop" d="M254.01,113.99c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S220.09,113.99,254.01,113.99    M254.01,56.99c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S355.63,56.99,254.01,56.99L254.01,56.99z"/></g></svg>';
+var oImage = '<div class="svg-wrapper"><svg version="1.1" class="mark y" id="O_Shape" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve"><g id="shapeShadow"><path class="shapeShadow" d="M245.99,132.01c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S212.06,132.01,245.99,132.01    M245.99,75.01c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S347.61,75.01,245.99,75.01L245.99,75.01z"/></g><g id="oTop"><path class="oTop" d="M254.01,113.99c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S220.09,113.99,254.01,113.99    M254.01,56.99c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S355.63,56.99,254.01,56.99L254.01,56.99z"/></g></svg></div>';
 
 var squares = new Array(9);
 
@@ -65,7 +65,7 @@ function newGame() {
     $('.gameinfo').addClass('fadeout');
     setTimeout( function () {
         $('.gameinfo').removeClass('fadeout');
-        $('.gameinfo').html('<h1 class> <svg version="1.1" class="mark side x clickable" id="charSelectX" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve" tabindex="0"><g id="shapeShadow"><rect x="281.55" y="323.71" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -187.5368 322.119)" class="shapeShadow" width="27.02" height="127.46"/><polyline class="shapeShadow" points="148.07,259.55 167.18,240.45 77.05,150.32 57.95,169.42 148.07,259.55 	"/><polyline class="shapeShadow" points="77.05,330.57 57.95,349.68 150.32,442.05 169.43,422.95 77.05,330.57 	"/></g><polygon id="xTop" class="xTop" points="442.05,150.32 349.68,57.95 259.55,148.07 169.43,57.95 77.05,150.32 167.18,240.45 77.05,330.57 169.43,422.95 259.55,332.82 349.68,422.95 442.05,330.57 351.93,240.45 "/> </svg> or <svg version="1.1" class="mark side o clickable" id="charSelectO" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve" tabindex="0"><g id="shapeShadow"><path class="shapeShadow" d="M245.99,132.01c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S212.06,132.01,245.99,132.01    M245.99,75.01c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S347.61,75.01,245.99,75.01L245.99,75.01z"/></g><g id="oTop"><path class="oTop" d="M254.01,113.99c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S220.09,113.99,254.01,113.99    M254.01,56.99c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S355.63,56.99,254.01,56.99L254.01,56.99z"/></g></svg> </h1>')
+        $('.gameinfo').html('<h1 class> <div class="svg-wrapper"><svg version="1.1" class="mark side x clickable" id="charSelectX" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve" tabindex="0"><g id="shapeShadow"><rect x="281.55" y="323.71" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -187.5368 322.119)" class="shapeShadow" width="27.02" height="127.46"/><polyline class="shapeShadow" points="148.07,259.55 167.18,240.45 77.05,150.32 57.95,169.42 148.07,259.55 	"/><polyline class="shapeShadow" points="77.05,330.57 57.95,349.68 150.32,442.05 169.43,422.95 77.05,330.57 	"/></g><polygon id="xTop" class="xTop" points="442.05,150.32 349.68,57.95 259.55,148.07 169.43,57.95 77.05,150.32 167.18,240.45 77.05,330.57 169.43,422.95 259.55,332.82 349.68,422.95 442.05,330.57 351.93,240.45 "/> </svg> </div> or <div class="svg-wrapper"><svg version="1.1" class="mark side o clickable" id="charSelectO" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve" tabindex="0"><g id="shapeShadow"><path class="shapeShadow" d="M245.99,132.01c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S212.06,132.01,245.99,132.01    M245.99,75.01c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S347.61,75.01,245.99,75.01L245.99,75.01z"/></g><g id="oTop"><path class="oTop" d="M254.01,113.99c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S220.09,113.99,254.01,113.99    M254.01,56.99c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S355.63,56.99,254.01,56.99L254.01,56.99z"/></g></svg> </div></h1>')
     }, 250);
 
     $('.board').on('click keypress', '#charSelectX', function(press) {
@@ -394,8 +394,8 @@ function changeGameInfoTurn() {
         $('.gameinfo').addClass('fadeout');
         setTimeout( function () {
             $('.gameinfo').removeClass('fadeout');
-            if ($('.gameinfo').find('svg').length == 1)
-               $('.gameinfo').find('svg').replaceWith(image);
+            if ($('.gameinfo').find('.svg-wrapper').length == 1)
+               $('.gameinfo').find('.svg-wrapper').replaceWith(image);
             else
                 $('.gameinfo').prepend(image);
             h1.html('<span class="turnInfoText">\'s Turn</span>');
@@ -405,7 +405,7 @@ function changeGameInfoTurn() {
         $('.gameinfo').addClass('fadeout');
         setTimeout( function () {
             $('.gameinfo').removeClass('fadeout');
-            $('.gameinfo').find('svg').remove();
+            $('.gameinfo').find('.svg-wrapper').remove();
             h1.html("Tied!");
             h1.attr("class", "");
             $('.gameinfo').prepend('<div class="reset" style="height: calc(var(--squarewidth) / 2); width: var(--gridwidth);position: absolute; border-radius: calc(var(--squarewidth) / 10); cursor: pointer; z-index: 3;" tabindex="0"></div>');
@@ -416,13 +416,13 @@ function changeGameInfoTurn() {
 
 function darkenTiles(j, f, k) {
     for (i = 0; i < j; i++) {
-        $('.'+i).find('.mark').addClass('darken');
+        $('.'+i).find('.svg-wrapper').addClass('darken');
     } for (i++; i < f; i++) {
-        $('.'+i).find('.mark').addClass('darken');
+        $('.'+i).find('.svg-wrapper').addClass('darken');
     } for (i++; i < k; i++) {
-        $('.'+i).find('.mark').addClass('darken');
+        $('.'+i).find('.svg-wrapper').addClass('darken');
     } for (i++; i <= 8; i++) {
-        $('.'+i).find('.mark').addClass('darken');
+        $('.'+i).find('.svg-wrapper').addClass('darken');
     }
 };
 
@@ -486,7 +486,7 @@ function won(shape) {
     $('.gameinfo').addClass('fadeout');
     setTimeout( function () {
         $('.gameinfo').removeClass('fadeout');
-        $('.gameinfo').find('svg').replaceWith(image);
+        $('.gameinfo').find('.svg-wrapper').replaceWith(image);
         h1.html('<span class="turnInfoText" style="margin-left: 1vmin"> Won!</span>');
         $('.gameinfo').prepend('<div class="reset" style="height: calc(var(--squarewidth) / 2); width: var(--gridwidth);position: absolute; border-radius: calc(var(--squarewidth) / 10); cursor: pointer;" tabindex="0"></div>');
     }, 250);
