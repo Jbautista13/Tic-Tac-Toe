@@ -1,33 +1,27 @@
-
 var turn = 0;
 var i = 0;
-var winner = false;
-var diagonal = false;
-var displayed = false;
-var column = 0;
 
-var xImage = '<div class="svg-wrapper"><svg version="1.1" class="mark x" id="X_Shape" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve"><g id="shapeShadow"><rect x="281.55" y="323.71" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -187.5368 322.119)" class="shapeShadow" width="27.02" height="127.46"/><polyline class="shapeShadow" points="148.07,259.55 167.18,240.45 77.05,150.32 57.95,169.42 148.07,259.55 	"/><polyline class="shapeShadow" points="77.05,330.57 57.95,349.68 150.32,442.05 169.43,422.95 77.05,330.57 	"/></g><polygon id="xTop" class="xTop" points="442.05,150.32 349.68,57.95 259.55,148.07 169.43,57.95 77.05,150.32 167.18,240.45 77.05,330.57 169.43,422.95 259.55,332.82 349.68,422.95 442.05,330.57 351.93,240.45 "/> </svg></div>';
-
-var oImage = '<div class="svg-wrapper"><svg version="1.1" class="mark y" id="O_Shape" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve"><g id="shapeShadow"><path class="shapeShadow" d="M245.99,132.01c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S212.06,132.01,245.99,132.01    M245.99,75.01c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S347.61,75.01,245.99,75.01L245.99,75.01z"/></g><g id="oTop"><path class="oTop" d="M254.01,113.99c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S220.09,113.99,254.01,113.99    M254.01,56.99c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S355.63,56.99,254.01,56.99L254.01,56.99z"/></g></svg></div>';
+const board = document.querySelector('.board')
+const xImage = '<div class="svg-wrapper"><svg version="1.1" class="mark x" id="X_Shape" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve"><g id="shapeShadow"><rect x="281.55" y="323.71" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -187.5368 322.119)" class="shapeShadow" width="27.02" height="127.46"/><polyline class="shapeShadow" points="148.07,259.55 167.18,240.45 77.05,150.32 57.95,169.42 148.07,259.55 	"/><polyline class="shapeShadow" points="77.05,330.57 57.95,349.68 150.32,442.05 169.43,422.95 77.05,330.57 	"/></g><polygon id="xTop" class="xTop" points="442.05,150.32 349.68,57.95 259.55,148.07 169.43,57.95 77.05,150.32 167.18,240.45 77.05,330.57 169.43,422.95 259.55,332.82 349.68,422.95 442.05,330.57 351.93,240.45 "/> </svg></div>';
+const oImage = '<div class="svg-wrapper"><svg version="1.1" class="mark y" id="O_Shape" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve"><g id="shapeShadow"><path class="shapeShadow" d="M245.99,132.01c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S212.06,132.01,245.99,132.01    M245.99,75.01c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S347.61,75.01,245.99,75.01L245.99,75.01z"/></g><g id="oTop"><path class="oTop" d="M254.01,113.99c33.92,0,65.82,13.21,89.8,37.2s37.2,55.88,37.2,89.8s-13.21,65.82-37.2,89.8   s-55.88,37.2-89.8,37.2s-65.82-13.21-89.8-37.2s-37.2-55.88-37.2-89.8s13.21-65.82,37.2-89.8S220.09,113.99,254.01,113.99    M254.01,56.99c-101.62,0-184,82.38-184,184s82.38,184,184,184s184-82.38,184-184S355.63,56.99,254.01,56.99L254.01,56.99z"/></g></svg></div>';
 
 var squares = new Array(9);
 
 window.onload = function() {
+
     if ((window.navigator.standalone) || (window.matchMedia('(display-mode: standalone)').matches))
         $('#viewport').attr('content', 'width=device-width, initial-scale=1.0, user-scalable=no')
+
     newGame();
 };
 
 // Check for stored Theme and Wins
-
 if (localStorage.getItem('theme') != null) {
     $('body').addClass(localStorage.getItem('theme'));
     if (localStorage.getItem('theme') == "dark") {
         $('body').removeClass('light');
         $('meta[name="theme-color"]').attr('content', '#1c1c1c');
         $('.darkSwitch').prop('checked', true);
-    } else {
-        $('body').removeClass('dark');
     }
 }
 
@@ -38,15 +32,11 @@ if (localStorage.getItem('xwins') > 0 || localStorage.getItem('ywins') > 0) {
 $('.darkSwitch').click(function () {
     if ($(this).prop('checked')) {
         $('body').addClass('dark').removeClass('light');
-        setTimeout(function () {
-            $('meta[name="theme-color"]').attr('content', '#1c1c1c');
-        }, 0);
+        $('meta[name="theme-color"]').attr('content', '#1c1c1c');
         localStorage.setItem('theme', 'dark');
     } else {
         $('body').addClass('light').removeClass('dark');
-        setTimeout(function () {
-            $('meta[name="theme-color"]').attr('content', '#ebebeb');
-        }, 0);
+        $('meta[name="theme-color"]').attr('content', '#ebebeb');
         localStorage.setItem('theme', 'light');
     }
 });
@@ -54,12 +44,13 @@ $('.darkSwitch').click(function () {
 function newGame() {
     
     i = 0;
+    board.dataset.winner = false;
+
     setTimeout( function () {
         $('.header').removeClass('fadeout');
         $('.square').removeClass('darken');
-        winner = false;
-        diagonal = false;
     }, 520);
+
     squares = new Array(9);
     
     $('.gameinfo').addClass('fadeout');
@@ -72,16 +63,7 @@ function newGame() {
         if(clickOrKeyPress(press))
         {
             turn = 0;
-            changeGameInfoTurn();
-            $('.header').addClass('fadeout');
-            $('.informationbar, .selections').addClass('movedown');
-            setTimeout(function () {
-                $('.informationbar, .selections').removeClass('movedown');
-                $('.grid').removeClass('hidden');
-            }, 500);
-            setTimeout(function () {
-                $('.grid').addClass('visible');
-            }, 520);
+            startNewGame();
         }
     });
 
@@ -89,7 +71,14 @@ function newGame() {
         if(clickOrKeyPress(press))
         {
             turn = 1;
-            changeGameInfoTurn();
+            startNewGame();
+        }
+    });
+
+};
+
+function startNewGame() {
+    changeGameInfoTurn();
             $('.header').addClass('fadeout');
             $('.informationbar, .selections').addClass('movedown');
             setTimeout(function () {
@@ -99,10 +88,7 @@ function newGame() {
             setTimeout(function () {
                 $('.grid').addClass('visible');
             }, 520);
-        }
-    });
-
-};
+}
 
 function clickOrKeyPress(press) {
     
@@ -123,6 +109,9 @@ $('body').keydown(function(keyPress) {
     current = $(':focus')[0];
     currentIndex = $(':tabbable').index(current);
     numElements = $(':tabbable').length;
+
+    if (document.activeElement instanceof HTMLInputElement)
+        return;
 
     if (numElements > 2)
         numElements--;
@@ -189,12 +178,12 @@ $('body').keydown(function(keyPress) {
                 
                 if (currentIndex != 9 && Math.floor(currentIndex / 3) == 0) {
                     $(':tabbable')[9].focus();
-                    column = currentIndex % 3;
+                    board.dataset.column = currentIndex % 3;
                 }
                 else if (currentIndex != 9)
                     $(':tabbable')[currentIndex - 3].focus();
                 else
-                    $(':tabbable')[currentIndex - (3 - column)].focus();
+                    $(':tabbable')[currentIndex - (3 - board.dataset.column)].focus();
             }
             break;
         case 83:
@@ -214,14 +203,14 @@ $('body').keydown(function(keyPress) {
             {
                 if (currentIndex != 9 && Math.floor(currentIndex / 3) == 2) {
                     $(':tabbable')[9].focus();
-                    column = currentIndex % 3;
+                    board.dataset.column = currentIndex % 3;
                 }
                 else if (currentIndex != 9) {
                     $(':tabbable')[currentIndex + 3].focus();
-                    column = currentIndex % 3;
+                    board.dataset.column = currentIndex % 3;
                 }
                 else {
-                    $(':tabbable')[currentIndex - (9 - column)].focus();
+                    $(':tabbable')[currentIndex - (9 - board.dataset.column)].focus();
                 }
             }
             break;
@@ -316,7 +305,7 @@ $(".square").on('click keypress', function(press) {
 
     if(clickOrKeyPress(press))
     {
-        if (winner) {
+        if (board.dataset.winner == 'true') {
             if (!square.hasClass('i'))
             {
                 square.addClass("i");
@@ -324,7 +313,7 @@ $(".square").on('click keypress', function(press) {
                     square.removeClass("i");
                 }, 1250);
             }
-        } else if (square.children('svg')[0] == null) {
+        } else if (square.children('div')[0] == null) {
             addMark(square);
             turn++; i++;
             if (calculateWin(square.attr("class").split(" ")[1])) {
@@ -357,7 +346,7 @@ function addMark(x) {
 };
 
 function removeMark() {
-    if (!diagonal) {
+    if (!(document.querySelector('.grid').dataset.diagonal == 'true')) {
         $('.grid').removeClass('extendh extendv');
         setTimeout( function () {
             $('.grid').removeClass('horizontal vertical center top bottom left middle right');
@@ -369,6 +358,7 @@ function removeMark() {
             setTimeout( function () {
                 $('.grid').removeClass('horizontal center');
             }, 300);
+            document.querySelector('.grid').dataset.diagonal = false;
         }, 400); 
     }
 };
@@ -443,7 +433,7 @@ function gameOver() {
             setTimeout(function () {
                 $('.grid').removeClass('visible');
             }, 250);
-            if (winner == true) {
+            if (board.dataset.winner == 'true') {
                 removeMark();
             }
             $('.square').find('.mark').addClass('fadeout');
@@ -458,7 +448,7 @@ function won(shape) {
     
     if (shape == 0) {
         localStorage.setItem('xwins', +localStorage.getItem('xwins')+1);
-        if (!displayed) {
+        if ($('.score').hasClass('hidden')) {
             displayScore();
         } else {
             changeXScore();
@@ -470,7 +460,7 @@ function won(shape) {
     } else {
         localStorage.setItem('ywins', +localStorage.getItem('ywins')+1);
         image = oImage;
-        if (!displayed) {
+        if ($('.score').hasClass('hidden')) {
             displayScore();
         } else {
             changeYScore();
@@ -482,7 +472,7 @@ function won(shape) {
 
     $('.square').removeClass('clickable');
 
-    winner = true;
+    board.dataset.winner = true;
     $('.gameinfo').addClass('fadeout');
     setTimeout( function () {
         $('.gameinfo').removeClass('fadeout');
@@ -500,7 +490,6 @@ function displayScore() {
     if (localStorage.getItem('ywins') == null) {
         localStorage.setItem('ywins', 0);
     }
-    displayed = true;
     $('.darkSwitch').addClass('movedown');
     $('.board').addClass('moveleft');
     setTimeout(function () {
@@ -560,15 +549,13 @@ function markRow(row) {
                 break;
 
             case 6:
-                diagonal = true;
-                $('.grid').addClass('horizontal center extendh');
-                $('.grid').addClass('tl')
+                document.querySelector('.grid').dataset.diagonal = true;
+                $('.grid').addClass('horizontal center extendh tl');
                 break;
 
             case 7:
-                diagonal = true;
-                $('.grid').addClass('horizontal center extendh');
-                $('.grid').addClass('bl')
+                document.querySelector('.grid').dataset.diagonal = true;
+                $('.grid').addClass('horizontal center extendh bl');
                 break;
         
         }
@@ -739,63 +726,3 @@ function calculateWin(squareNum) {
             }
         }
 };
-
-/*function calculateWins(squareNum) {
-    if (i < 5) {
-        return false;
-    } else {
-        switch(squareNum) {
-            case '0':
-                return (
-                    (squares[0] == squares[1] && squares[1] == squares[2]) ||
-                    (squares[0] == squares[3] && squares[3] == squares[6]) ||
-                    (squares[0] == squares[4] && squares[4] == squares[8])
-                );
-            case '1':
-                return (
-                    (squares[0] == squares[1] && squares[1] == squares[2]) ||
-                    (squares[1] == squares[4] && squares[4] == squares[7])
-                );
-            case '2':
-                return (
-                    (squares[0] == squares[1] && squares[1] == squares[2]) ||
-                    (squares[2] == squares[4] && squares[4] == squares[6]) ||
-                    (squares[2] == squares[5] && squares[5] == squares[8])
-                );
-            case '3':
-                return (
-                    (squares[0] == squares[3] && squares[3] == squares[6]) ||
-                    (squares[3] == squares[4] && squares[4] == squares[5])
-                );
-            case '4':
-                return (
-                    (squares[0] == squares[4] && squares[4] == squares[8]) ||
-                    (squares[1] == squares[4] && squares[4] == squares[7]) ||
-                    (squares[2] == squares[4] && squares[4] == squares[6]) ||
-                    (squares[3] == squares[4] && squares[4] == squares[5])
-                );
-            case '5':
-                return (
-                    (squares[2] == squares[5] && squares[5] == squares[8]) ||
-                    (squares[3] == squares[4] && squares[4] == squares[5])
-                );
-            case '6':
-                return (
-                    (squares[0] == squares[3] && squares[3] == squares[6]) ||
-                    (squares[2] == squares[4] && squares[4] == squares[6]) ||
-                    (squares[6] == squares[7] && squares[7] == squares[8])
-                );
-            case '7':
-                return (
-                    (squares[1] == squares[4] && squares[4] == squares[7]) ||
-                    (squares[6] == squares[7] && squares[7] == squares[8])
-                );
-            case '8':
-                return (
-                    (squares[0] == squares[4] && squares[4] == squares[8]) ||
-                    (squares[2] == squares[5] && squares[5] == squares[8]) ||
-                    (squares[6] == squares[7] && squares[7] == squares[8])
-                );
-        }
-    }
-};*/
