@@ -422,7 +422,7 @@ function gameOver() {
         {
             setTimeout(function () {
                 $('.square').html(' ');
-                $('.square').find('.mark').removeClass('fadeout');
+                $('.square').find('.svg-wrapper').removeClass('fadeout');
                 $('.square').addClass('clickable');
                 $('.informationbar, .selections').addClass('moveup');
                 setTimeout(function () {
@@ -436,7 +436,7 @@ function gameOver() {
             if (board.dataset.winner == 'true') {
                 removeMark();
             }
-            $('.square').find('.mark').addClass('fadeout');
+            $('.square').find('.svg-wrapper').addClass('fadeout');
             newGame();
         }
     });
